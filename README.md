@@ -14,7 +14,7 @@ Add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  zoho_api: ^1.0.0
+  zohobooks_api: ^1.0.0
 ```
 
 Then run:

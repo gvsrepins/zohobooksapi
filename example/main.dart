@@ -1,6 +1,6 @@
-import 'package:zoho_api/src/enums/region.dart';
+import 'package:zohobooks_api/src/enums/region.dart';
 import 'package:dotenv/dotenv.dart';
-import 'package:zoho_api/zoho_api.dart';
+import 'package:zohobooks_api/zohoboks_api.dart';
 
 Future<void> main() async {
   var env = DotEnv(includePlatformEnvironment: true)..load();

@@ -1,4 +1,4 @@
-import 'package:zoho_api/zoho_api.dart';
+import 'package:zohobooks_api/zohoboks_api.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 
 class ZohoBooks {

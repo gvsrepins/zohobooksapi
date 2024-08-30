@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
-import 'package:zoho_api/src/enums/region.dart';
-import 'package:zoho_api/src/oauth_client.dart';
+import 'package:zohobooks_api/src/enums/region.dart';
+import 'package:zohobooks_api/src/oauth_client.dart';
 import 'package:dotenv/dotenv.dart';
 
 void main() {

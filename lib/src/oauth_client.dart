@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:oauth2/oauth2.dart' as oauth2;
-import 'package:zoho_api/src/enums/region.dart';
+import 'package:zohobooks_api/src/enums/region.dart';
 
 class OauthClientProvider {
   
