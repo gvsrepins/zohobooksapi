@@ -29,7 +29,7 @@ class OauthClient {
   // Setup the Oauth2 client
   Future<oauth2.Client?> _createOauthClient() async {
     
-    if (outhClientExists) {
+    if (_outhClientExists) {
       return oauthClient;
     }
 
@@ -41,11 +41,16 @@ class OauthClient {
     );
   }
 
-  bool get outhClientExists => oauthClient != null;
+  bool get _outhClientExists => oauthClient != null;
   
   //Get the Oauth client
   Future<oauth2.Client?> getClient() async {
       return _createOauthClient();
+  }
+
+  // Get the scopes
+  List<String> get scopes {
+    return _scopes;
   }
 
   // Set the scopes

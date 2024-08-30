@@ -16,7 +16,11 @@ Future<void> main() async {
     scopes: ['ZohoBooks.fullaccess.all']
   );
 
-  var zohoBooks =  ZohoBooks(oauthClient: oauthClient, organizationId: organizationId);
-  zohoBooks.getContacts();
+  var zohoBooks =  ZohoBooks(
+    oauthClient: oauthClient, 
+    organizationId: organizationId
+  );
 
+  zohoBooks.getContacts();
+  
 }
