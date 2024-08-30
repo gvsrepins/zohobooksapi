@@ -9,7 +9,9 @@ Future<void> main() async {
   final String organizationId = env['ORGANIZATION_ID']!;
 
  
-  var zohoBooks = ZohoBooks(identifier: identifier, secret: secret);
+  var zohoBooks = OauthClient(identifier: identifier, secret: secret);
+  zohoBooks.scopes = ['ZohoBooks.fullaccess.all'];
+
   var client = await zohoBooks.getOauthClient();
 
   // Once you have a Client, you can use it just like any other HTTP client.
