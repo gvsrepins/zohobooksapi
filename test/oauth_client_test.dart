@@ -23,21 +23,21 @@ void main() {
   group('OauthClient', () {
 
     test('should create an instance of OauthClient', () {
-      final oauthClient = OauthClient(
+      final oauthClient = OauthClientProvider(
         identifier: identifier,
         secret: secret,
         region: region,
         scopes: scopes,
       );
 
-      expect(oauthClient, isA<OauthClient>());
+      expect(oauthClient, isA<OauthClientProvider>());
       expect(oauthClient.identifier, identifier);
       expect(oauthClient.secret, secret);
       expect(oauthClient.region, region);      
     });
 
     test('should set scopes', () {
-      final oauthClient = OauthClient(
+      final oauthClient = OauthClientProvider(
         identifier: identifier,
         secret: secret,
         region: region,
@@ -51,14 +51,14 @@ void main() {
     });
 
     test('should create oauth2 client', () async {
-      final oauthClient = OauthClient(
+      final oauthClient = OauthClientProvider(
         identifier: identifier,
         secret: secret,
         region: region,
         scopes: scopes,
       );
 
-      final client = await oauthClient.getClient();    
+      final client = await oauthClient.init();    
       expect(client, isA<oauth2.Client>()); 
 
     });

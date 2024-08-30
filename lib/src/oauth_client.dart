@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:zoho_api/src/enums/region.dart';
 
-class OauthClient {
+class OauthClientProvider {
   
   // The authorization server's endpoint.
   final Uri authorizationEndpoint =
@@ -12,40 +12,30 @@ class OauthClient {
   final String secret;
   final Region region;
 
+  late final oauth2.Client oauthClient;
   List<String> _scopes = <String>['ZohoBooks.fullaccess.all'];
 
-  oauth2.Client? oauthClient;
-
   // Instantiate the OauthClient
-  OauthClient({
+  OauthClientProvider({
     required this.identifier,
     required this.secret,
     this.region=Region.US,
     List<String>? scopes
-  }){
-    oauthClient = null;
-  }
+  });
 
   // Setup the Oauth2 client
-  Future<oauth2.Client?> _createOauthClient() async {
-    
-    if (_outhClientExists) {
-      return oauthClient;
-    }
-
+  Future<oauth2.Client> _init() async {
     return await oauth2.clientCredentialsGrant(
       authorizationEndpoint, 
       identifier, 
       secret, 
-      scopes: _scopes
+      scopes: _scopes,
     );
   }
-
-  bool get _outhClientExists => oauthClient != null;
   
   //Get the Oauth client
-  Future<oauth2.Client?> getClient() async {
-      return _createOauthClient();
+  Future<oauth2.Client> init() async {
+      return _init();
   }
 
   // Get the scopes

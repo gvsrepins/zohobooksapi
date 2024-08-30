@@ -9,7 +9,7 @@ Future<void> main() async {
   final String secret = env['ZOHO_API_SECRET']!;
   final String organizationId = env['ORGANIZATION_ID']!;
 
-  var oauthClient = OauthClient(
+  var oauthProvider = OauthClientProvider(
     identifier: identifier,
     secret: secret,
     region: Region.US,
@@ -17,7 +17,7 @@ Future<void> main() async {
   );
 
   var zohoBooks =  ZohoBooks(
-    oauthClient: oauthClient, 
+    oauthProvider: oauthProvider, 
     organizationId: organizationId
   );
 
