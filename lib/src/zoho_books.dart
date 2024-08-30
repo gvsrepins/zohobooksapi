@@ -1,48 +1,15 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+import 'package:zoho_api/zoho_api.dart';
 
-import 'package:oauth2/oauth2.dart' as oauth2;
+class ZohoBooks {
+  final OauthClient oauthClient;
+  final String organizationId;
 
-class OauthClient {
-  
-  // The authorization server's endpoint.
-  final Uri authorizationEndpoint =
-      Uri.parse('https://accounts.zoho.com/oauth/v2/token');
- 
-  final String identifier;
-  final String secret;
+  ZohoBooks({required this.oauthClient, required this.organizationId});
 
-  List<String> _scopes = <String>['ZohoBooks.fullaccess.all'];
+  Future<void> getContacts() async {
+    var oauthClient = await this.oauthClient.getClient();
 
-  oauth2.Client? oauthClient;
-
-  // Instantiate the OauthClient
-  OauthClient({required this.identifier, required this.secret});
-
-  // Setup the Oauth2 client
-  Future<oauth2.Client?> _createOauthClient() async {
-    
-    if (oauthClient != null) {
-      return oauthClient;
-    }
-
-    return await oauth2.clientCredentialsGrant(
-      authorizationEndpoint, 
-      identifier, 
-      secret, 
-      scopes: _scopes
-    );
+    // Once you have a Client, you can use it just like any other HTTP client.
+    print(await oauthClient!.read(Uri.parse('https://www.zohoapis.com/books/v3/contacts?organization_id=$organizationId')));
   }
-  
-  //Get the Oauth client
-  Future<oauth2.Client?> getOauthClient() async {
-      return _createOauthClient();
-  }
-
-  // Set the scopes
-  set scopes(List<String> scopes) {
-    _scopes = scopes;
-  }
-
 }
