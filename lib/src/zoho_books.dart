@@ -6,16 +6,10 @@ class ZohoBooks {
   final String organizationId;
 
   //modules
-  late Project _projects;
-
-  Project get projects => _projects;
-
-  set projects(Project value) {
-    _projects = value;
-  }
+  late Project projects;
 
   ZohoBooks({required this.oauthClient, required this.organizationId}){
-    _projects = Project(oauthClient, organizationId);
+    projects = Project(oauthClient, organizationId);
   }
 
   Future<void> getContacts() async {

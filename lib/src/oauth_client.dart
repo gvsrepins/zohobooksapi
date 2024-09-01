@@ -13,7 +13,7 @@ class OauthClientProvider {
   final Region region;
 
   late final oauth2.Client oauthClient;
-  List<String> _scopes = <String>['ZohoBooks.fullaccess.all'];
+  List<String> scopes = <String>['ZohoBooks.fullaccess.all'];
 
   // Instantiate the OauthClient
   OauthClientProvider({
@@ -29,23 +29,13 @@ class OauthClientProvider {
       authorizationEndpoint, 
       identifier, 
       secret, 
-      scopes: _scopes,
+      scopes: scopes,
     );
   }
   
   //Get the Oauth client
   Future<oauth2.Client> init() async {
       return _init();
-  }
-
-  // Get the scopes
-  List<String> get scopes {
-    return _scopes;
-  }
-
-  // Set the scopes
-  set scopes(List<String> scopes) {
-    _scopes = scopes;
   }
 
 }

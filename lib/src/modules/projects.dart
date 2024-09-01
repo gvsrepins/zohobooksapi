@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 class Project {
   final oauth2.Client httpClient;
   final String baseUrl;
-  final organizationId;
+  final String organizationId;
 
   Project(
     this.httpClient,
