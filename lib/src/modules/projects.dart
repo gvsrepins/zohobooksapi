@@ -24,7 +24,7 @@ class Project {
     return Uri.parse('$baseUrl/$path?organization_id=$organizationId');
   }
 
-  dynamic createProject({
+  dynamic create({
     required String projectName,
     required String customerId,
     required String userId,
@@ -92,7 +92,7 @@ class Project {
   }
 }
 
-  Future<http.Response> updateProject(Map<String, dynamic> data) async {
+  Future<http.Response> update(Map<String, dynamic> data) async {
     final uri = prepareUrl('projects');
     return await _put(uri, data);
   }
@@ -102,82 +102,82 @@ class Project {
     return await _get(uri);
   }
 
-  Future<http.Response> updateProjectById(String projectId, Map<String, dynamic> data) async {
+  Future<http.Response> updateById(String projectId, Map<String, dynamic> data) async {
     final uri = prepareUrl('projects/$projectId');
     return await _put(uri, data);
   }
 
-  Future<http.Response> getProjectById(String projectId) async {
+  Future<http.Response> getById(String projectId) async {
     final uri = prepareUrl('projects/$projectId');
     return await _get(uri);
   }
 
-  Future<http.Response> deleteProjectById(String projectId) async {
+  Future<http.Response> deleteById(String projectId) async {
     final uri = prepareUrl('projects/$projectId');
     return await _delete(uri);
   }
 
-  Future<http.Response> activateProject(String projectId) async {
+  Future<http.Response> activate(String projectId) async {
     final uri = prepareUrl('projects/$projectId/active');
     return await _post(uri, {});
   }
 
-  Future<http.Response> deactivateProject(String projectId) async {
+  Future<http.Response> deactivate(String projectId) async {
     final uri = prepareUrl('projects/$projectId/inactive');
     return await _post(uri, {});
   }
 
-  Future<http.Response> cloneProject(String projectId) async {
+  Future<http.Response> clone(String projectId) async {
     final uri = prepareUrl('projects/$projectId/clone');
     return await _post(uri, {});
   }
 
-  Future<http.Response> addUserToProject(String projectId, Map<String, dynamic> data) async {
+  Future<http.Response> addUser(String projectId, Map<String, dynamic> data) async {
     final uri = prepareUrl('projects/$projectId/users');
     return await _post(uri, data);
   }
 
-  Future<http.Response> getUsersInProject(String projectId) async {
+  Future<http.Response> getUsers(String projectId) async {
     final uri = prepareUrl('projects/$projectId/users');
     return await _get(uri);
   }
 
-  Future<http.Response> inviteUserToProject(String projectId, Map<String, dynamic> data) async {
+  Future<http.Response> inviteUser(String projectId, Map<String, dynamic> data) async {
     final uri = prepareUrl('projects/$projectId/users/invite');
     return await _post(uri, data);
   }
 
-  Future<http.Response> updateUserInProject(String projectId, String userId, Map<String, dynamic> data) async {    
+  Future<http.Response> updateUser(String projectId, String userId, Map<String, dynamic> data) async {    
     final uri = prepareUrl('projects/$projectId/users/invite/$userId');
     return await _put(uri, data);
   }
 
-  Future<http.Response> getUserInProject(String projectId, String userId) async {
+  Future<http.Response> getUser(String projectId, String userId) async {
     final uri = prepareUrl('projects/$projectId/users/invite/$userId');
     return await _get(uri);
   }
 
-  Future<http.Response> deleteUserFromProject(String projectId, String userId) async {
+  Future<http.Response> deleteUser(String projectId, String userId) async {
     final uri = prepareUrl('projects/$projectId/users/invite/$userId');
     return await _delete(uri);
   }
 
-  Future<http.Response> addCommentToProject(String projectId, Map<String, dynamic> data) async {
+  Future<http.Response> addComment(String projectId, Map<String, dynamic> data) async {
     final uri = prepareUrl('projects/$projectId/comments');
     return await _post(uri, data);
   }
 
-  Future<http.Response> getCommentsInProject(String projectId) async {
+  Future<http.Response> getComments(String projectId) async {
     final uri = prepareUrl('projects/$projectId/comments');
     return await _get(uri);
   }
 
-  Future<http.Response> deleteCommentFromProject(String projectId, String commentId) async {
+  Future<http.Response> deleteComment(String projectId, String commentId) async {
     final uri = prepareUrl('projects/$projectId/comments/$commentId');
     return await _delete(uri);
   }
 
-  Future<http.Response> getInvoicesInProject(String projectId) async {
+  Future<http.Response> getInvoices(String projectId) async {
     final uri = prepareUrl('projects/$projectId/invoices');
     return await _get(uri);
   }

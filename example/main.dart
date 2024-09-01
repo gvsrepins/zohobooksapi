@@ -25,7 +25,7 @@ Future<void> main() async {
 
   //zohoBooks.getContacts();
 
-  zohoBooks.project.createProject(
+  zohoBooks.projects.create(
       projectName: "REAL TIME TRAFFIC FLUX",
       customerId: "460000000044001",
       currencyCode: "USD",
