@@ -1,8 +1,9 @@
+import 'dart:io';
 import 'package:test/test.dart';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:zohobooks_api/src/enums/region.dart';
 import 'package:zohobooks_api/src/oauth_client.dart';
-import 'package:dotenv/dotenv.dart';
+//import 'package:dotenv/dotenv.dart';
 
 void main() {
   //var env = DotEnv(includePlatformEnvironment: true)..load(['test/.env']);
@@ -13,8 +14,8 @@ void main() {
   late List<String> scopes;
 
   setUp(() async {
-    identifier = env['ZOHO_API_IDENTIFIER']!;
-    secret = env['ZOHO_API_SECRET']!;   
+    identifier = String.fromEnvironment('ZOHO_API_IDENTIFIER');
+    secret = String.fromEnvironment('ZOHO_API_SECRET');
     region = Region.US;
     scopes = ['ZohoBooks.fullaccess.all']; 
   });
