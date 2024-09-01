@@ -5,3 +5,4 @@ library;
 
 export 'src/oauth_client.dart';
 export 'src/zoho_books.dart';
+export 'src/modules/projects.dart';

@@ -16,11 +16,44 @@ Future<void> main() async {
     scopes: ['ZohoBooks.fullaccess.all']
   );
 
+  var oauthClient = await oauthProvider.init();
+
   var zohoBooks =  ZohoBooks(
-    oauthProvider: oauthProvider, 
+    oauthClient: oauthClient, 
     organizationId: organizationId
   );
 
-  zohoBooks.getContacts();
-  
+  //zohoBooks.getContacts();
+
+  zohoBooks.project.createProject(
+      projectName: "REAL TIME TRAFFIC FLUX",
+      customerId: "460000000044001",
+      currencyCode: "USD",
+      description: "A simple algorithm is to be tested with vehicle detection application.",
+      billingType: "fixed_cost_for_project",
+      rate: "5000",
+      costBudgetAmount: 1000.00,
+      userId: "INV-00003",
+      // tasks: [
+      //   {
+      //     "task_name": "Distribution Analysis",
+      //     "description": "A simple algorithm is to be tested with vehicle detection application.",
+      //     "rate": "5000",
+      //     "budget_hours": "0"
+      //   }
+      // ],
+      // users: [
+      //   {
+      //     "user_id": "460000000024003",
+      //     "is_current_user": true,
+      //     "user_name": "John David",
+      //     "email": "johndavid@zilliuminc.com",
+      //     "user_role": "admin",
+      //     "status": "active",
+      //     "rate": "5000",
+      //     "budget_hours": "0",
+      //     "cost_rate": "10.00"
+      //   }
+      // ],
+    );
 }
