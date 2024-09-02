@@ -9,12 +9,12 @@ import 'package:http/http.dart' as http;
 // or multiple tasks. A project is billed and charged upon a customer
 // whom the project was taken up for.
 // Ref: https://www.zoho.com/books/api/v3/projects/#overview
-class Project {
+class Projects {
   final oauth2.Client httpClient;
   final String baseUrl;
   final String organizationId;
 
-  Project(
+  Projects(
     this.httpClient,
     this.organizationId,
     {this.baseUrl = 'https://www.zohoapis.com/books/v3'}
@@ -72,7 +72,7 @@ class Project {
   };
 
   final uri = prepareUrl('projects');
-  //print(json.encoder.convert(data));
+  print(json.encoder.convert(data));
 
   final response = await _post(uri, data);
 
@@ -87,7 +87,7 @@ class Project {
       throw HttpException('API Error: ${responseBody['message']}', uri: uri);
     }
   } else {
-    //print(response.body);
+    print(response.body);
     throw HttpException('Failed to create project', uri: uri);
   }
 }

@@ -23,8 +23,7 @@ Future<void> main() async {
     organizationId: organizationId
   );
 
-  //zohoBooks.getContacts();
-
+  //zohoBooks.contats.get();
   zohoBooks.projects.create(
       projectName: "REAL TIME TRAFFIC FLUX",
       customerId: "460000000044001",
