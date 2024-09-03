@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 // or multiple tasks. A project is billed and charged upon a customer
 // whom the project was taken up for.
 // Ref: https://www.zoho.com/books/api/v3/projects/#overview
-class BaseModule {
+class BaseResource {
   final oauth2.Client httpClient;
   final String baseUrl;
   final String organizationId;
@@ -16,7 +16,7 @@ class BaseModule {
   final String resourceName = '';
   final String resourcPath = '';
 
-  BaseModule(this.httpClient, this.organizationId,
+  BaseResource(this.httpClient, this.organizationId,
       {this.baseUrl = 'https://www.zohoapis.com/books/v3'});
 
   Uri prepareUrl({String? pathSegments = ""}) {

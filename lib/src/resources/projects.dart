@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // or multiple tasks. A project is billed and charged upon a customer
 // whom the project was taken up for.
 // Ref: https://www.zoho.com/books/api/v3/projects/#overview
-class Projects extends BaseModule {
+class Projects extends BaseResource {
   Projects(super.httpClient, super.organizationId,
       {super.baseUrl = 'https://www.zohoapis.com/books/v3'});
 

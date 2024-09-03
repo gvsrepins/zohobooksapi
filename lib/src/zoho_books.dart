@@ -7,14 +7,12 @@ class ZohoBooks {
   late final oauth2.Client oauthClient;
   final String organizationId;
 
-  //modules
-
   Projects get projects =>
-      projects = _createModule('Projects', [oauthClient, organizationId]);
+      projects = _createResource('Projects', [oauthClient, organizationId]);
 
   set projects(Projects value) {}
 
-  final Map<String, String> _availableModules = {
+  final Map<String, String> _availableResources = {
     'contacts': 'Contacts',
     'estimates': 'Estimates',
     'salesorders': 'SalesOrders',
@@ -45,16 +43,16 @@ class ZohoBooks {
   ZohoBooks({required this.oauthClient, required this.organizationId});
 
   // Factory function to create instances based on a type string using reflection
-  dynamic _createModule(String module, List<dynamic> args) {
+  dynamic _createResource(String resourceName, List<dynamic> args) {
     // Get the current mirror system
     MirrorSystem mirrorSystem = currentMirrorSystem();
 
-    if (_availableModules[module.toLowerCase()] == null) {
-      throw ArgumentError('Module "$module" not found in modules map.');
+    if (_availableResources[resourceName.toLowerCase()] == null) {
+      throw ArgumentError('Resource "$resourceName" not found in resources map.');
     }
 
     // Retrieve the library URI from the map using the type as the key
-    String libraryUri = '$module.dart'.toLowerCase();
+    String libraryUri = '$resourceName.dart'.toLowerCase();
 
     // Find the specific library by its URI
     LibraryMirror libraryMirror = mirrorSystem.libraries.values.firstWhere(
@@ -64,16 +62,16 @@ class ZohoBooks {
     );
 
     // Check if the class exists in this library
-    if (libraryMirror.declarations.containsKey(Symbol(module))) {
+    if (libraryMirror.declarations.containsKey(Symbol(resourceName))) {
       // Get the class mirror by the class name (type)
       ClassMirror classMirror =
-          libraryMirror.declarations[Symbol(module)] as ClassMirror;
+          libraryMirror.declarations[Symbol(resourceName)] as ClassMirror;
 
       // Dynamically create the instance using the class mirror and the provided arguments
       return classMirror.newInstance(Symbol(''), args).reflectee;
     }
 
-    throw ArgumentError('Class "$module" not found in library "$libraryUri".');
+    throw ArgumentError('Class "$resourceName" not found in library "$libraryUri".');
   }
 
   // Define a custom getter using noSuchMethod
@@ -82,8 +80,8 @@ class ZohoBooks {
     if (invocation.isGetter) {
       var memberName = _getMemberName(invocation.memberName);
 
-      if (_availableModules[memberName] != null) {
-        return _createModule(memberName, [oauthClient, organizationId]);
+      if (_availableResources[memberName] != null) {
+        return _createResource(memberName, [oauthClient, organizationId]);
       }
     }
 
