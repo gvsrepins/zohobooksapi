@@ -16,65 +16,11 @@ class Projects extends BaseResource {
   @override
   String get resourceName => 'projects';
 
-  dynamic create({
-    required String projectName,
-    required String customerId,
-    required String userId,
-    required String billingType,
-    String? currencyCode,
-    String? description,
-    String? rate,
-    String? budgetType,
-    String? budgetHours,
-    String? budgetAmount,
-    double? costBudgetAmount,
-    List<Map<String, dynamic>>? tasks,
-    List<Map<String, dynamic>>? users,
-  }) async {
-    // Basic validations
-    if (projectName.isEmpty || projectName.length > 100) {
-      throw ArgumentError(
-          'Project name is required and must be less than 100 characters.');
-    }
-    if (customerId.isEmpty) {
-      throw ArgumentError('Customer ID is required.');
-    }
-    if (billingType.isEmpty ||
-        ![
-          'fixed_cost_for_project',
-          'based_on_project_hours',
-          'based_on_staff_hours',
-          'based_on_task_hours'
-        ].contains(billingType)) {
-      throw ArgumentError(
-          'Billing type is required and must be one of the allowed values.');
-    }
-    if (userId.isEmpty) {
-      throw ArgumentError('User ID is required.');
-    }
+  dynamic create(ProjectDTO project) async {
+   
+    print(project.toJson());
 
-    // Prepare the data to be sent
-    final Map<String, dynamic> data = {
-      'project_name': projectName,
-      'customer_id': customerId,
-      if (currencyCode != null) 'currency_code': currencyCode,
-      if (description != null && description.length <= 500)
-        'description': description,
-      'billing_type': billingType,
-      if (rate != null) 'rate': rate,
-      if (budgetType != null) 'budget_type': budgetType,
-      if (budgetHours != null) 'budget_hours': budgetHours,
-      if (budgetAmount != null) 'budget_amount': budgetAmount,
-      if (costBudgetAmount != null)
-        'cost_budget_amount': costBudgetAmount.toString(),
-      'user_id': userId,
-      if (tasks != null) 'tasks': tasks,
-      if (users != null) 'users': users,
-    };
-
-    print(json.encoder.convert(data));
-
-    final response = await post(data);
+    final response = await post(project.toJson());
 
     // Decodding the response body
     var responseBody = json.decode(response.body);

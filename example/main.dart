@@ -23,9 +23,8 @@ Future<void> main() async {
     organizationId: organizationId
   );
 
-  //zohoBooks.contats.get();
-  zohoBooks.projects.create(
-      projectName: "REAL TIME TRAFFIC FLUX",
+  var project = ProjectDTO(
+    projectName: "REAL TIME TRAFFIC FLUX",
       customerId: "460000000044001",
       currencyCode: "USD",
       description: "A simple algorithm is to be tested with vehicle detection application.",
@@ -33,26 +32,7 @@ Future<void> main() async {
       rate: "5000",
       costBudgetAmount: 1000.00,
       userId: "INV-00003",
-      // tasks: [
-      //   {
-      //     "task_name": "Distribution Analysis",
-      //     "description": "A simple algorithm is to be tested with vehicle detection application.",
-      //     "rate": "5000",
-      //     "budget_hours": "0"
-      //   }
-      // ],
-      // users: [
-      //   {
-      //     "user_id": "460000000024003",
-      //     "is_current_user": true,
-      //     "user_name": "John David",
-      //     "email": "johndavid@zilliuminc.com",
-      //     "user_role": "admin",
-      //     "status": "active",
-      //     "rate": "5000",
-      //     "budget_hours": "0",
-      //     "cost_rate": "10.00"
-      //   }
-      // ],
-    );
+  );
+
+  zohoBooks.projects.create(project);
 }
