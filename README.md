@@ -26,17 +26,18 @@ dart pub get
 
 ## Zoho Books Setup
 
-#### Self client
+### Self client
+
 If you want your app to fetch data from your own Zoho account, or set up app-to-app communication in the backend without any user interaction, you can use the Self Client option. In this situation, you will be the resource owner and there will be no end-user authorization required. The client will request access permission on behalf of itself and not any end-user.
 
 Follow the steps to set up Self Client:
 
 #### Create a self client in API console
+
 1. Go to the [Zoho API console](http://api-console.zoho.com/). 
 1. Click **GET STARTED**. 
 1. Hover over the *Self Client* option and click **CREATE NOW**. 
 1. Click **CREATE**, then click **OK**. A Client ID and Client Secret will be created and shown under the Client Secret tab. You can copy these.
-
 
 ## Usage
 

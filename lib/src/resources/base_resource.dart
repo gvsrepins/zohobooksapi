@@ -2,47 +2,59 @@ import 'dart:convert';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:http/http.dart' as http;
 
-// A project is a series of tasks performed over a period of time,
-// to achieve certain targets. There can be many number of people
-// working on a single project and a project may consist of single
-// or multiple tasks. A project is billed and charged upon a customer
-// whom the project was taken up for.
-// Ref: https://www.zoho.com/books/api/v3/projects/#overview
 class BaseResource {
   final oauth2.Client httpClient;
-  final String baseUrl;
   final String organizationId;
+
+  //Pagination
+  final int page = 1;
+  final int perPage = 100;
 
   final String resourceName = '';
   final String resourcPath = '';
+  final String baseUrl = 'https://www.zohoapis.com/books/v3';
 
-  BaseResource(this.httpClient, this.organizationId,
-      {this.baseUrl = 'https://www.zohoapis.com/books/v3'});
+  BaseResource(this.httpClient, this.organizationId);
 
-  Uri prepareUrl({String? pathSegments = ""}) {
-    var resourcPath = pathSegments ?? this.resourcPath;
-    return Uri.parse(
-        '$baseUrl/$resourceName/$resourcPath?organization_id=$organizationId');
+  // Helper method for preparing the URL
+  Uri prepareUrl({
+    String resourcePath = '',
+    Map<String, String>? queryParameters,
+  }) {
+    
+    var finalResourcePath =
+        resourcePath.isNotEmpty ? resourcePath : this.resourcPath;
+
+    Uri baseUri = Uri.parse(baseUrl);
+    
+    List<String> pathSegments = [
+      ...baseUri.pathSegments,
+      resourceName,
+      finalResourcePath
+    ];
+
+    queryParameters ??= {};
+    queryParameters['organization_id'] = organizationId;
+
+    return baseUri.replace(
+      pathSegments: pathSegments,
+      queryParameters: queryParameters,
+    );
   }
 
-  // Helper methods for HTTP requests
-  Future<http.Response> post(Map<String, dynamic> data, {String? pathSegments = ''}) async {
-    final uri = prepareUrl(pathSegments: pathSegments);
+  Future<http.Response> post(uri, Map<String, dynamic> data) async {
     return await httpClient.post(uri, body: json.encoder.convert(data));
   }
 
-  Future<http.Response> put(Map<String, dynamic> data, {String? pathSegments = ''}) async {
-    final uri = prepareUrl(pathSegments: pathSegments);
+  Future<http.Response> put(uri, Map<String, dynamic> data) async {
     return await httpClient.put(uri, body: json.encoder.convert(data));
   }
 
-  Future<http.Response> get({String? pathSegments = ''}) async {
-    final uri = prepareUrl(pathSegments: pathSegments);
+  Future<http.Response> get(uri) async {
     return await httpClient.get(uri);
   }
 
-  Future<http.Response> delete({String? pathSegments = ''}) async {
-    final uri = prepareUrl(pathSegments: pathSegments);
+  Future<http.Response> delete(uri) async {
     return await httpClient.delete(uri);
   }
 }

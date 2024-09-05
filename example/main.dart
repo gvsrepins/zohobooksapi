@@ -35,12 +35,18 @@ Future<void> main() async {
 
   print(project.toJson());
 
+  // Clone project
   // var response = await zohoBooks.projects.update(project);
-  // print(response.statusCode);
-  // print(response.body);
 
-  var response = await zohoBooks.projects.clone('5546603000000108003',
-      ProjectCloneDTO(projectName: 'REAL TIME TRAFFIC FLUX COPY'));
+  // Get projects
+  var response = await zohoBooks.projects.read();
+  
+  // Clone project
+  // var response = await zohoBooks.projects.clone(
+  //   '5546603000000108003',
+  //   ProjectCloneDTO(projectName: 'REAL TIME TRAFFIC FLUX COPY')
+  // );
+
   print(response.statusCode);
   print(response.body);
 }

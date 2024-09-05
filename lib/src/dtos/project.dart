@@ -1,3 +1,6 @@
+//TODO: Add SubAttributes users and tasks
+import 'package:zohobooks_api/zohoboks_api.dart';
+
 class ProjectDTO {
   
   String projectName; // Required
@@ -30,6 +33,7 @@ class ProjectDTO {
   List<dynamic> recurringInvoices;
   String createdTime;
   bool showInDashboard;
+  List<ProjectUserDTO> users = [];
   
   ProjectDTO({
     required this.projectName,
@@ -61,14 +65,14 @@ class ProjectDTO {
     this.recurringInvoices = const [],
     this.createdTime = '',
     this.showInDashboard = false,
+    this.users = const [],
   }) {
     // Add validation checks here
-    _validateRequiredField(projectName, 'projectName');
     _validateProjectNameLength(projectName);
-    _validateRequiredField(customerId, 'customerId');
-    _validateRequiredField(userId, 'userId');
-    _validateBillingType(billingType);
     _validateDescriptionLength(description);
+
+    _validateBillingType(billingType);
+        
     _validateBudgetType(budgetType);
     _validateNonNegativeValue(costBudgetAmount, 'costBudgetAmount');
     _validateNonNegativeValue(totalAmount, 'totalAmount');
@@ -78,12 +82,6 @@ class ProjectDTO {
     _validateNonNegativeValue(nonBillableAmount, 'nonBillableAmount');
   }
 
-  // Validation methods
-  void _validateRequiredField(String field, String fieldName) {
-    if (field.isEmpty) {
-      throw ArgumentError('$fieldName is required.');
-    }
-  }
 
   void _validateProjectNameLength(String name) {
     if (name.length > 100) {
@@ -164,6 +162,7 @@ class ProjectDTO {
     if (recurringInvoices.isNotEmpty) data['recurring_invoices'] = recurringInvoices;
     if (createdTime.isNotEmpty) data['created_time'] = createdTime;
     if (showInDashboard) data['show_in_dashboard'] = showInDashboard;
+    if (users.isNotEmpty) data['users'] = users;
     
     return data;
   }
