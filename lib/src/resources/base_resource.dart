@@ -26,16 +26,14 @@ class BaseResource {
   }
 
   // Helper methods for HTTP requests
-  Future<http.Response> post(Map<String, dynamic> data,
-      {String? pathSegments = ''}) async {
+  Future<http.Response> post(Map<String, dynamic> data, {String? pathSegments = ''}) async {
     final uri = prepareUrl(pathSegments: pathSegments);
     return await httpClient.post(uri, body: json.encoder.convert(data));
   }
 
-  Future<http.Response> put(Map<String, dynamic> data,
-      {String? pathSegments = ''}) async {
+  Future<http.Response> put(Map<String, dynamic> data, {String? pathSegments = ''}) async {
     final uri = prepareUrl(pathSegments: pathSegments);
-    return await httpClient.put(uri);
+    return await httpClient.put(uri, body: json.encoder.convert(data));
   }
 
   Future<http.Response> get({String? pathSegments = ''}) async {

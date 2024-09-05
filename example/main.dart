@@ -10,29 +10,37 @@ Future<void> main() async {
   final String organizationId = env['ORGANIZATION_ID']!;
 
   var oauthProvider = OauthClientProvider(
-    identifier: identifier,
-    secret: secret,
-    region: Region.US,
-    scopes: ['ZohoBooks.fullaccess.all']
-  );
+      identifier: identifier,
+      secret: secret,
+      region: Region.US,
+      scopes: ['ZohoBooks.fullaccess.all']);
 
   var oauthClient = await oauthProvider.init();
 
-  var zohoBooks =  ZohoBooks(
-    oauthClient: oauthClient, 
-    organizationId: organizationId
-  );
+  var zohoBooks =
+      ZohoBooks(oauthClient: oauthClient, organizationId: organizationId);
 
   var project = ProjectDTO(
-    projectName: "REAL TIME TRAFFIC FLUX",
-      customerId: "460000000044001",
-      currencyCode: "USD",
-      description: "A simple algorithm is to be tested with vehicle detection application.",
-      billingType: "fixed_cost_for_project",
-      rate: "5000",
-      costBudgetAmount: 1000.00,
-      userId: "INV-00003",
+    projectId: "5546603000000109003",
+    projectName: "Prettify the code v2",
+    customerId: "5546603000000100003",
+    currencyCode: "USD",
+    description:
+        "A simple algorithm is to be tested with vehicle detection application.",
+    billingType: "fixed_cost_for_project",
+    rate: "500",
+    costBudgetAmount: 600.00,
+    userId: "INV-00003",
   );
 
-  zohoBooks.projects.create(project);
+  print(project.toJson());
+
+  // var response = await zohoBooks.projects.update(project);
+  // print(response.statusCode);
+  // print(response.body);
+
+  var response = await zohoBooks.projects.clone('5546603000000108003',
+      ProjectCloneDTO(projectName: 'REAL TIME TRAFFIC FLUX COPY'));
+  print(response.statusCode);
+  print(response.body);
 }

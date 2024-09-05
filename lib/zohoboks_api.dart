@@ -12,4 +12,5 @@ export 'src/resources/base_resource.dart';
 
 //DTOs
 export 'src/dtos/project.dart';
+export 'src/dtos/project_clone.dart';
 export 'src/dtos/project_user.dart';
