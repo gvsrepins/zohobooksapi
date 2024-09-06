@@ -27,12 +27,12 @@ class BaseResource {
     Uri baseUri = Uri.parse(baseUrl);
 
     return baseUri.replace(
-      pathSegments: preparePathSegments(resourcePath, baseUri),
-      queryParameters: prepareQueryParameters(queryParameters)
+      pathSegments: _preparePathSegments(resourcePath, baseUri),
+      queryParameters: _prepareQueryParameters(queryParameters)
     );
   }
 
-  List<String> preparePathSegments(String resourcePath, Uri baseUri) {
+  List<String> _preparePathSegments(String resourcePath, Uri baseUri) {
     var finalResourcePath =
         resourcePath.isNotEmpty ? resourcePath : this.resourcePath;
         
@@ -41,11 +41,11 @@ class BaseResource {
       resourceName,
       finalResourcePath
     ];
-    
+
     return pathSegments;
   }
 
-  Map<String, dynamic>? prepareQueryParameters(Map<String, dynamic>? queryParameters) {
+  Map<String, dynamic>? _prepareQueryParameters(Map<String, dynamic>? queryParameters) {
     queryParameters ??= {};
     queryParameters['organization_id'] = organizationId;
     queryParameters.addAll(pageContextQueryParameters);
