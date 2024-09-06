@@ -20,7 +20,7 @@ class BaseResource {
 
   // Helper method for preparing the URL
   Uri prepareUrl({
-    String resourcePath = '',
+    String? resourcePath = '',
     Map<String, dynamic>? queryParameters,
   }) {
     
@@ -32,9 +32,9 @@ class BaseResource {
     );
   }
 
-  List<String> _preparePathSegments(String resourcePath, Uri baseUri) {
+  List<String> _preparePathSegments(String? resourcePath, Uri baseUri) {
     var finalResourcePath =
-        resourcePath.isNotEmpty ? resourcePath : this.resourcePath;
+        resourcePath!.isNotEmpty ? resourcePath : this.resourcePath;
         
     List<String> pathSegments = [
       ...baseUri.pathSegments,

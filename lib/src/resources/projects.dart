@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 // Ref: https://www.zoho.com/books/api/v3/projects/#overview
 
 class Projects extends BaseResource {
-  
   Map<String, dynamic> queryParameters = {
     'sort_column': 'created_time',
     'sort_order': 'D',
@@ -23,39 +22,44 @@ class Projects extends BaseResource {
 
   //OAuth Scope : ZohoBooks.projects.CREATE
   Future<http.Response> create(ProjectDTO project) async {
+
+    if(project.projectId != null) {
+      throw ArgumentError('Project ID cannot be set while creating a project');
+    }
+    
     var uri = super.prepareUrl();
     return post(uri, project.toJson());
   }
 
-  //OAuth Scope : ZohoBooks.projects.UPDATE
-  Future<http.Response> update(ProjectDTO project) async {
-    return updateById(project.projectId, project);
-  }
-
   //OAuth Scope : ZohoBooks.projects.READ
-  Future<http.Response> read({Map<String, dynamic>queryParameters = const {}}) async {
-    
+  Future<http.Response> all(
+      {Map<String, dynamic> queryParameters = const {}}) async {
     //merge new queryParameters with the default ones
-    queryParameters = this.queryParameters..addAll(queryParameters);    
+    queryParameters = this.queryParameters..addAll(queryParameters);
     var uri = super.prepareUrl(queryParameters: queryParameters);
-    
+
     return await get(uri);
   }
 
   //OAuth Scope : ZohoBooks.projects.UPDATE
-  Future<http.Response> updateById(String projectId, ProjectDTO project) async {
-    var uri = super.prepareUrl(resourcePath: projectId);
+  Future<http.Response> update(ProjectDTO project) async {
+    
+    if(project.projectId == null) {
+      throw ArgumentError('Project ID is required');
+    }
+
+    var uri = super.prepareUrl(resourcePath: project.projectId);
     return await put(uri, project.toJson());
   }
 
   //OAuth Scope : ZohoBooks.projects.READ
-  Future<http.Response> readById(String projectId) async {
+  Future<http.Response> find(String projectId) async {
     var uri = super.prepareUrl(resourcePath: projectId);
     return await get(uri);
   }
 
   //OAuth Scope : ZohoBooks.projects.DELETE
-  Future<http.Response> deleteById(String projectId) async {
+  Future<http.Response> destroy(String projectId) async {
     var uri = super.prepareUrl(resourcePath: projectId);
     return await delete(uri);
   }
@@ -131,20 +135,5 @@ class Projects extends BaseResource {
   Future<http.Response> getInvoices(String projectId) async {
     var uri = super.prepareUrl(resourcePath: '$projectId/invoices');
     return await get(uri);
-  }
-
-  set filterBy(String value) {
-    const allowedValues = [
-      'Status.All',
-      'Status.Active',
-      'Status.Inactive',
-    ];
-
-    if (!allowedValues.contains(value)) {
-      throw ArgumentError(
-          'Billing type must be one of the following: $allowedValues.');
-    }
-
-    filterBy = value;
   }
 }
