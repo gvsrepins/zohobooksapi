@@ -7,11 +7,14 @@ import 'package:http/http.dart' as http;
 // or multiple tasks. A project is billed and charged upon a customer
 // whom the project was taken up for.
 // Ref: https://www.zoho.com/books/api/v3/projects/#overview
+
 class Projects extends BaseResource {
-  //QueryString
-  final String sortColumn = 'created_time';
-  final String sortOrder = 'D';
-  final filterBy = 'Status.All,';
+  
+  Map<String, dynamic> queryParameters = {
+    'sort_column': 'created_time',
+    'sort_order': 'D',
+    'filter_by': 'Status.All',
+  };
 
   Projects(super.httpClient, super.organizationId);
 
@@ -30,8 +33,12 @@ class Projects extends BaseResource {
   }
 
   //OAuth Scope : ZohoBooks.projects.READ
-  Future<http.Response> read() async {
-    var uri = super.prepareUrl();
+  Future<http.Response> read({Map<String, dynamic>queryParameters = const {}}) async {
+    
+    //merge new queryParameters with the default ones
+    queryParameters = this.queryParameters..addAll(queryParameters);    
+    var uri = super.prepareUrl(queryParameters: queryParameters);
+    
     return await get(uri);
   }
 
@@ -72,10 +79,9 @@ class Projects extends BaseResource {
   }
 
   //TODO: test the methods bellow
-  Future<http.Response> addUser(
-      String projectId, Map<String, dynamic> data) async {
+  Future<http.Response> addUser(String projectId, ProjectUserDTO user) async {
     var uri = super.prepareUrl(resourcePath: '$projectId/users');
-    return await post(uri, data);
+    return await post(uri, user.toJson());
   }
 
   Future<http.Response> getUsers(String projectId) async {
@@ -84,9 +90,9 @@ class Projects extends BaseResource {
   }
 
   Future<http.Response> inviteUser(
-      String projectId, Map<String, dynamic> data) async {    
+      String projectId, Map<String, dynamic> data) async {
     var uri = super.prepareUrl(resourcePath: '$projectId/users/invite');
-    return await post(uri, data);    
+    return await post(uri, data);
   }
 
   Future<http.Response> updateUser(

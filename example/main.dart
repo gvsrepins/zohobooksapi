@@ -38,8 +38,11 @@ Future<void> main() async {
   // Clone project
   // var response = await zohoBooks.projects.update(project);
 
-  // Get projects
-  var response = await zohoBooks.projects.read();
+  var response = await zohoBooks.projects.read(queryParameters: {
+    'sort_column': 'project_name',
+    'sort_order': 'A',
+    'filter_by': 'Status.All',
+  });
   
   // Clone project
   // var response = await zohoBooks.projects.clone(

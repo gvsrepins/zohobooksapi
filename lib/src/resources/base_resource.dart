@@ -3,12 +3,14 @@ import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:http/http.dart' as http;
 
 class BaseResource {
+
   final oauth2.Client httpClient;
   final String organizationId;
 
-  //Pagination
-  final int page = 1;
-  final int perPage = 100;
+  Map<String,dynamic> pageContextQueryParameters = {
+    'page': '1',
+    'per_page': '100',
+  };
 
   final String resourceName = '';
   final String resourcPath = '';
@@ -19,7 +21,7 @@ class BaseResource {
   // Helper method for preparing the URL
   Uri prepareUrl({
     String resourcePath = '',
-    Map<String, String>? queryParameters,
+    Map<String, dynamic>? queryParameters,
   }) {
     
     var finalResourcePath =
@@ -35,6 +37,7 @@ class BaseResource {
 
     queryParameters ??= {};
     queryParameters['organization_id'] = organizationId;
+    queryParameters.addAll(pageContextQueryParameters);
 
     return baseUri.replace(
       pathSegments: pathSegments,
