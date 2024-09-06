@@ -13,7 +13,7 @@ class BaseResource {
   };
 
   final String resourceName = '';
-  final String resourcPath = '';
+  final String resourcePath = '';
   final String baseUrl = 'https://www.zohoapis.com/books/v3';
 
   BaseResource(this.httpClient, this.organizationId);
@@ -24,25 +24,32 @@ class BaseResource {
     Map<String, dynamic>? queryParameters,
   }) {
     
-    var finalResourcePath =
-        resourcePath.isNotEmpty ? resourcePath : this.resourcPath;
-
     Uri baseUri = Uri.parse(baseUrl);
-    
+
+    return baseUri.replace(
+      pathSegments: preparePathSegments(resourcePath, baseUri),
+      queryParameters: prepareQueryParameters(queryParameters)
+    );
+  }
+
+  List<String> preparePathSegments(String resourcePath, Uri baseUri) {
+    var finalResourcePath =
+        resourcePath.isNotEmpty ? resourcePath : this.resourcePath;
+        
     List<String> pathSegments = [
       ...baseUri.pathSegments,
       resourceName,
       finalResourcePath
     ];
+    
+    return pathSegments;
+  }
 
+  Map<String, dynamic>? prepareQueryParameters(Map<String, dynamic>? queryParameters) {
     queryParameters ??= {};
     queryParameters['organization_id'] = organizationId;
     queryParameters.addAll(pageContextQueryParameters);
-
-    return baseUri.replace(
-      pathSegments: pathSegments,
-      queryParameters: queryParameters,
-    );
+    return queryParameters;
   }
 
   Future<http.Response> post(uri, Map<String, dynamic> data) async {
