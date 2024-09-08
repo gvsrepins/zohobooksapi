@@ -13,33 +13,30 @@ class BaseResource {
   };
 
   final String resourceName = '';
-  final String resourcePath = '';
   final String baseUrl = 'https://www.zohoapis.com/books/v3';
 
   BaseResource(this.httpClient, this.organizationId);
 
   // Helper method for preparing the URL
   Uri prepareUrl({
-    String? resourcePath = '',
+    String? pathSegment = '',
     Map<String, dynamic>? queryParameters,
   }) {
     
     Uri baseUri = Uri.parse(baseUrl);
 
     return baseUri.replace(
-      pathSegments: _preparePathSegments(resourcePath, baseUri),
+      pathSegments: _preparePathSegments(pathSegment, baseUri),
       queryParameters: _prepareQueryParameters(queryParameters)
     );
   }
 
-  List<String> _preparePathSegments(String? resourcePath, Uri baseUri) {
-    var finalResourcePath =
-        resourcePath!.isNotEmpty ? resourcePath : this.resourcePath;
-        
+  List<String> _preparePathSegments(String? pathSegment, Uri baseUri) {
+  
     List<String> pathSegments = [
       ...baseUri.pathSegments,
       resourceName,
-      finalResourcePath
+      pathSegment??''
     ];
 
     return pathSegments;

@@ -21,8 +21,8 @@ Future<void> main() async {
       ZohoBooks(oauthClient: oauthClient, organizationId: organizationId);
 
   var project = ProjectDTO(
-    projectId: "5546603000000109003",
-    projectName: "Prettify the code v2",
+    //projectId: "5546603000000109003",
+    projectName: "New Project Name",
     customerId: "5546603000000100003",
     currencyCode: "USD",
     description:
@@ -34,15 +34,15 @@ Future<void> main() async {
   );
 
   print(project.toJson());
-
+    
   // Clone project
-  // var response = await zohoBooks.projects.update(project);
+  var response = await zohoBooks.projects.create(project);
 
-  var response = await zohoBooks.projects.read(queryParameters: {
-    'sort_column': 'project_name',
-    'sort_order': 'A',
-    'filter_by': 'Status.All',
-  });
+  // response = await zohoBooks.projects.all(queryParameters: {
+  //   'sort_column': 'project_name',
+  //   'sort_order': 'A',
+  //   'filter_by': 'Status.All',
+  // });
   
   // Clone project
   // var response = await zohoBooks.projects.clone(

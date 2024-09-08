@@ -48,92 +48,92 @@ class Projects extends BaseResource {
       throw ArgumentError('Project ID is required');
     }
 
-    var uri = super.prepareUrl(resourcePath: project.projectId);
+    var uri = super.prepareUrl(pathSegment: project.projectId);
     return await put(uri, project.toJson());
   }
 
   //OAuth Scope : ZohoBooks.projects.READ
   Future<http.Response> find(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: projectId);
+    var uri = super.prepareUrl(pathSegment: projectId);
     return await get(uri);
   }
 
   //OAuth Scope : ZohoBooks.projects.DELETE
   Future<http.Response> destroy(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: projectId);
+    var uri = super.prepareUrl(pathSegment: projectId);
     return await delete(uri);
   }
 
   //OAuth Scope : ZohoBooks.projects.CREATE
   Future<http.Response> activate(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/active');
+    var uri = super.prepareUrl(pathSegment: '$projectId/active');
     return await post(uri, {});
   }
 
   //OAuth Scope : ZohoBooks.projects.CREATE
   Future<http.Response> inactivate(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/inactive');
+    var uri = super.prepareUrl(pathSegment: '$projectId/inactive');
     return await post(uri, {});
   }
 
   //OAuth Scope : ZohoBooks.projects.CREATE
   Future<http.Response> clone(String projectId, ProjectCloneDTO project) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/clone');
+    var uri = super.prepareUrl(pathSegment: '$projectId/clone');
     return await post(uri, project.toJson());
   }
 
   //TODO: test the methods bellow
   Future<http.Response> addUser(String projectId, ProjectUserDTO user) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/users');
+    var uri = super.prepareUrl(pathSegment: '$projectId/users');
     return await post(uri, user.toJson());
   }
 
   Future<http.Response> getUsers(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/users');
+    var uri = super.prepareUrl(pathSegment: '$projectId/users');
     return await get(uri);
   }
 
   Future<http.Response> inviteUser(
       String projectId, Map<String, dynamic> data) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/users/invite');
+    var uri = super.prepareUrl(pathSegment: '$projectId/users/invite');
     return await post(uri, data);
   }
 
   Future<http.Response> updateUser(
       String projectId, String userId, Map<String, dynamic> data) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/users/invite/$userId');
+    var uri = super.prepareUrl(pathSegment: '$projectId/users/invite/$userId');
     return await put(uri, data);
   }
 
   Future<http.Response> getUser(String projectId, String userId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/users/invite/$userId');
+    var uri = super.prepareUrl(pathSegment: '$projectId/users/invite/$userId');
     return await get(uri);
   }
 
   Future<http.Response> deleteUser(String projectId, String userId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/users/invite/$userId');
+    var uri = super.prepareUrl(pathSegment: '$projectId/users/invite/$userId');
     return await delete(uri);
   }
 
   Future<http.Response> addComment(
       String projectId, Map<String, dynamic> data) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/comments');
+    var uri = super.prepareUrl(pathSegment: '$projectId/comments');
     return await post(uri, data);
   }
 
   Future<http.Response> getComments(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/comments');
+    var uri = super.prepareUrl(pathSegment: '$projectId/comments');
     return await get(uri);
   }
 
   Future<http.Response> deleteComment(
       String projectId, String commentId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/comments/$commentId');
+    var uri = super.prepareUrl(pathSegment: '$projectId/comments/$commentId');
     return await delete(uri);
   }
 
   Future<http.Response> getInvoices(String projectId) async {
-    var uri = super.prepareUrl(resourcePath: '$projectId/invoices');
+    var uri = super.prepareUrl(pathSegment: '$projectId/invoices');
     return await get(uri);
   }
 }
