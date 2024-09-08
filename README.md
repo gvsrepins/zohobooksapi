@@ -68,7 +68,7 @@ var zohoBooks = ZohoBooks(
 );
 ```
 
-4. Use the API to interact with Zoho Books resources. For example, to create a new project:
+4. Use the API to interact with Zoho Books resources:
 
 ```dart
 //create a project
@@ -85,7 +85,14 @@ var response = await zohoBooks.projects.all(queryParameters: {
 'sort_order': 'A',
 'filter_by': 'Status.All',
 });
+```
 
+### Running Tests
+
+To run tests, use the following command:
+
+```bash
+dart test
 ```
 
 ## Roadmap
@@ -118,13 +125,6 @@ var response = await zohoBooks.projects.all(queryParameters: {
 - [ ] Users resources
 - [ ] Import resources
 
-### Running Tests
-
-To run tests, use the following command:
-
-```bash
-dart test
-```
 
 ## Contributing
 
