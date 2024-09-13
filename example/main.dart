@@ -16,11 +16,12 @@ Future<void> main() async {
 
   var oauthClient = await oauthProvider.init();
 
-  var zohoBooks =
-      ZohoBooks(oauthClient: oauthClient, organizationId: organizationId);
+  var zohoBooks = ZohoBooks(
+    oauthClient: oauthClient,
+    organizationId: organizationId
+  );
 
   var project = ProjectDTO(
-    //projectId: "5546603000000109003",
     projectName: "New Project Name",
     customerId: "5546603000000100003",
     currencyCode: "USD",
@@ -33,7 +34,7 @@ Future<void> main() async {
   );
 
   print(project.toJson());
-    
+
   // Clone project
   var response = await zohoBooks.projects.create(project);
 
@@ -42,7 +43,7 @@ Future<void> main() async {
   //   'sort_order': 'A',
   //   'filter_by': 'Status.All',
   // });
-  
+
   // Clone project
   // var response = await zohoBooks.projects.clone(
   //   '5546603000000108003',

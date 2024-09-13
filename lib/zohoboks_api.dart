@@ -3,7 +3,7 @@
 /// More dartdocs go here.
 library;
 
-export 'src/oauth_client.dart';
+export 'src/oauth_client_provider.dart';
 export 'src/zoho_books.dart';
 
 //Enums

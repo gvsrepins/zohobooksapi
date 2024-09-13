@@ -8,3 +8,4 @@ pubspec.lock
 .vscode
 .env
 credentials.json
+.DS_Store

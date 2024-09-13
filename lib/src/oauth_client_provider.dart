@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:zohobooks_api/src/enums/region.dart';
+import 'package:http/http.dart' as http;
 
 class OauthClientProvider {
   
@@ -12,7 +13,7 @@ class OauthClientProvider {
   final String secret;
   final Region region;
 
-  late final oauth2.Client oauthClient;
+  http.Client? httpClient;
   List<String> scopes = <String>['ZohoBooks.fullaccess.all'];
 
   // Instantiate the OauthClient
@@ -20,8 +21,12 @@ class OauthClientProvider {
     required this.identifier,
     required this.secret,
     this.region=Region.US,
-    List<String>? scopes
-  });
+    List<String>? scopes,
+    http.Client? httpClient
+  }){
+    this.scopes = scopes ?? this.scopes;
+    this.httpClient = httpClient ?? this.httpClient;
+  }
 
   // Setup the Oauth2 client
   Future<oauth2.Client> _init() async {
@@ -30,12 +35,13 @@ class OauthClientProvider {
       identifier, 
       secret, 
       scopes: scopes,
+      httpClient: httpClient
     );
   }
   
   //Get the Oauth client
-  Future<oauth2.Client> init() async {
-      return _init();
+  Future<oauth2.Client> init() async {    
+    return _init();
   }
 
 }
