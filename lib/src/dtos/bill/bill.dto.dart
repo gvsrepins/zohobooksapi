@@ -168,7 +168,7 @@ class BillDTO {
     }
   }
 
-  void _validateNonNegativeValue(double? value, String fieldName) {
+  void _validateNonNegativeValue(dynamic value, String fieldName) {
     if (value == null) return;
     if (value < 0) {
       throw ArgumentError('$fieldName must be a non-negative value.');
