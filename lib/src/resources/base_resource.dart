@@ -32,12 +32,14 @@ class BaseResource {
   }
 
   List<String> _preparePathSegments(String? pathSegment, Uri baseUri) {
-  
     List<String> pathSegments = [
       ...baseUri.pathSegments,
       resourceName,
-      pathSegment??''
     ];
+
+    if (pathSegment != null && pathSegment.isNotEmpty) {
+      pathSegments.addAll(pathSegment.split('/'));
+    }
 
     return pathSegments;
   }

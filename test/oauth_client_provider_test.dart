@@ -5,6 +5,7 @@ import 'package:zohobooks_api/zohoboks_api.dart';
 
 void main() {
   setup.main();
+  setup.clientVCR = setup.createVCRClient("oauth2");
 
   group('OauthClientProvider', () {
 

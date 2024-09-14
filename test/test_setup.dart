@@ -56,7 +56,7 @@ DartVCRClient createVCRClient(String cassetteName) {
   var advancedOptions = AdvancedOptions(censors: censors);
 
   // create an DartVCRClient using the cassette
-  return DartVCRClient(cassette, Mode.auto, advancedOptions: advancedOptions);
+  return DartVCRClient(cassette, Mode.record, advancedOptions: advancedOptions);
 }
 
 String? getEnvironmentVariable(DotEnv env, String key) {

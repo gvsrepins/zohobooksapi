@@ -17,3 +17,4 @@ dev_dependencies:
   dotenv: ^4.2.0
   mockito: ^5.4.4
   dartvcr: ^0.3.0
+  faker: ^2.2.0
