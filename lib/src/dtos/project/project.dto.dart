@@ -82,7 +82,6 @@ class ProjectDTO {
     _validateNonNegativeValue(nonBillableAmount, 'nonBillableAmount');
   }
 
-
   void _validateProjectNameLength(String name) {
     if (name.length > 100) {
       throw ArgumentError('Project name must be at most 100 characters long.');

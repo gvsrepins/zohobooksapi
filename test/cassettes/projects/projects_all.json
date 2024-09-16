@@ -1,0 +1,191 @@
+[
+  {
+    "duration": 628,
+    "recorded_at": "2024-09-16T12:05:28.303483",
+    "request": {
+      "body": "grant_type=client_credentials&scope=ZohoBooks.fullaccess.all",
+      "headers": {
+        "Authorization": "******",
+        "content-type": "application/x-www-form-urlencoded; charset=utf-8"
+      },
+      "method": "POST",
+      "uri": "https://accounts.zoho.com/oauth/v2/token"
+    },
+    "response": {
+      "body": "{\"access_token\":\"******\",\"scope\":\"ZohoBooks.fullaccess.all\",\"api_domain\":\"https://www.zohoapis.com\",\"token_type\":\"Bearer\",\"expires_in\":3600}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_b266a5bf57=a7f15cb1555106de5ac96d088b72e7c8; Path=/,iamcsr=189a10c6-e095-4270-9fa4-78564589db70;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=189a10c6-e095-4270-9fa4-78564589db70;path=/;SameSite=Strict;Secure;priority=high",
+        "cache-control": "no-store",
+        "date": "Mon, 16 Sep 2024 15:05:28 GMT",
+        "strict-transport-security": "max-age=63072000",
+        "content-length": "204",
+        "x-frame-options": "SAMEORIGIN",
+        "pragma": "no-cache",
+        "content-type": "application/json;charset=UTF-8",
+        "content-language": "en-US",
+        "x-content-type-options": "nosniff",
+        "server": "ZGS",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 200, "message": "" }
+    }
+  },
+  {
+    "duration": 806,
+    "recorded_at": "2024-09-16T12:05:29.114222",
+    "request": {
+      "body": "{\"project_name\":\"Project for Ernser, Schumm and Metz\",\"customer_id\":\"5529788000000089879\",\"user_id\":\"5529788000000088001\",\"billing_type\":\"fixed_cost_for_project\",\"currency_code\":\"USD\",\"description\":\"Nunc sed augue lacus viverra vitae.\",\"rate\":\"4723\",\"cost_budget_amount\":0.3917081807445464,\"users\":[{\"user_id\":\"5529788000000088001\",\"user_role\":\"admin\"}]}",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "authorization": "******"
+      },
+      "method": "POST",
+      "uri": "https://www.zohoapis.com/books/v3/projects?organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":0,\"message\":\"The project has been created.\",\"project\":{\"project_id\":\"5529788000000108001\",\"project_name\":\"Project for Ernser, Schumm and Metz\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"currency_id\":\"5529788000000088101\",\"customer_name\":\"Test Customer\",\"customer_first_name\":\"\",\"customer_email\":\"\",\"photo_url\":\"https://secure.gravatar.com/avatar/00000000000000000000000000000000?&d=mm\",\"currency_code\":\"BRL\",\"description\":\"Nunc sed augue lacus viverra vitae.\",\"status\":\"active\",\"billing_rate_frequency\":\"fixed\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":4723.0,\"is_from_zoho_projects\":false,\"budget_type\":\"\",\"budget_amount\":0.0,\"cost_budget_amount\":0.392,\"is_budget_threshold_notification_enabled\":false,\"is_client_approval_needed\":false,\"is_user_approval_needed\":false,\"hours_per_day\":\"00:00\",\"project_head_id\":\"\",\"project_head_name\":\"\",\"is_valid_project_head\":true,\"budget_threshold\":80.0,\"budget_threshold_formatted\":\"80.00%\",\"is_expense_inclusive\":0,\"total_hours\":\"00:00\",\"total_amount\":4723.0,\"total_amount_expense_inclusive\":\"\",\"billed_hours\":\"00:00\",\"billed_amount\":\"0.00\",\"un_billed_hours\":\"00:00\",\"un_billed_amount\":\"4723.000\",\"billable_hours\":\"00:00\",\"billable_amount\":0.0,\"non_billable_hours\":\"00:00\",\"non_billable_amount\":0.0,\"unused_retainer_payments\":0.0,\"has_active_recurring_profiles\":false,\"created_by_id\":\"5529788000000088001\",\"last_modified_by_id\":\"5529788000000088001\",\"created_time\":\"2024-09-16T12:05:28-0300\",\"zohopeople_project_id\":\"\",\"is_from_zoho_people\":false,\"zohoworkerly_project_id\":\"\",\"show_in_dashboard\":false,\"accounts_budgets\":[],\"tasks\":[],\"users\":[{\"user_id\":\"5529788000000088001\",\"is_current_user\":true,\"user_name\":\"Gabriel Fastdzine\",\"email\":\"gabrielsilva.fastdezine@gmail.com\",\"user_role\":\"admin\",\"role_id\":\"5529788000000000619\",\"status\":\"active\",\"rate\":0.0,\"budget_hours\":0,\"budget_hours_in_time\":\"00:00\",\"total_hours\":\"00:00\",\"billed_hours\":\"00:00\",\"un_billed_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"non_billable_hours\":\"00:00\",\"staff_role\":\"staff\",\"staff_status\":\"active\"}],\"custom_fields\":[],\"custom_field_hash\":{},\"documents\":[]}}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=0ed8aba59e1773edd0027bee7aaad3cc; Path=/,zbcscook=890ccbee-71be-498b-9efe-8ce968e066b0;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=890ccbee-71be-498b-9efe-8ce968e066b0;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=8F0AEE20370672F0FCF7E621E24A2968; Path=/; Secure; HttpOnly,BuildCookie_862560988=1; Max-Age=300; Expires=Mon, 16 Sep 2024 15:10:29 GMT; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 15:05:29 GMT",
+        "x-rate-limit-limit": "1000",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "x-rate-limit-remaining": "968",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "location": "/api/v3/projects/5529788000000108001",
+        "build_version": "Sep_13_2024_1_6886",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "allow": "OPTIONS, DELETE, POST, GET, PUT",
+        "client_build_version": "Sep_13_2024_1_6886",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "x-rate-limit-reset": "42871",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 201, "message": "" }
+    }
+  },
+  {
+    "duration": 298,
+    "recorded_at": "2024-09-16T12:05:29.419726",
+    "request": {
+      "body": "",
+      "headers": { "authorization": "******" },
+      "method": "GET",
+      "uri": "https://www.zohoapis.com/books/v3/projects?sort_column=project_name&sort_order=A&filter_by=Status.All&page=1&per_page=100&organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":0,\"message\":\"success\",\"projects\":[{\"project_id\":\"5529788000000096001\",\"project_name\":\"Project for Aufderhar and Sons\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Parturient montes nascetur ridiculus mus mauris vitae ultricies leo.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":69.0,\"created_time\":\"2024-09-16T11:26:44-0300\",\"last_modified_time\":\"2024-09-16T11:26:44-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000099001\",\"project_name\":\"Project for Crist-Wuckert\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Dui faucibus in ornare quam viverra orci sagittis eu.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":4947.0,\"created_time\":\"2024-09-16T11:39:59-0300\",\"last_modified_time\":\"2024-09-16T11:39:59-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000098001\",\"project_name\":\"Project for Cummings-Ward\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Ultrices sagittis orci a scelerisque purus semper.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":4893.0,\"created_time\":\"2024-09-16T11:35:46-0300\",\"last_modified_time\":\"2024-09-16T11:35:46-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000091011\",\"project_name\":\"Project for Daniel Group\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Placerat in egestas erat imperdiet sed euismod nisi porta lorem.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":2374.0,\"created_time\":\"2024-09-16T11:39:06-0300\",\"last_modified_time\":\"2024-09-16T11:39:06-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000108001\",\"project_name\":\"Project for Ernser, Schumm and Metz\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Nunc sed augue lacus viverra vitae.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":4723.0,\"created_time\":\"2024-09-16T12:05:28-0300\",\"last_modified_time\":\"2024-09-16T12:05:28-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000093001\",\"project_name\":\"Project for Hodkiewicz-Goyette\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Enim facilisis gravida neque convallis.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":1444.0,\"created_time\":\"2024-09-16T11:15:52-0300\",\"last_modified_time\":\"2024-09-16T11:15:52-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000097001\",\"project_name\":\"Project for Littel-Bartoletti\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":2467.0,\"created_time\":\"2024-09-16T11:27:51-0300\",\"last_modified_time\":\"2024-09-16T11:27:51-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000091007\",\"project_name\":\"Project for Oga, Ullrich and Lindgren\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Sagittis id consectetur purus ut faucibus pulvinar elementum integer.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":2556.0,\"created_time\":\"2024-09-16T11:22:47-0300\",\"last_modified_time\":\"2024-09-16T11:22:47-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000094001\",\"project_name\":\"Project for Runolfsson, Weimann and Crooks\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Curabitur vitae nunc sed velit.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":4436.0,\"created_time\":\"2024-09-16T11:22:44-0300\",\"last_modified_time\":\"2024-09-16T11:22:44-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000095001\",\"project_name\":\"Project for Russel-Thiel\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Nulla pellentesque dignissim enim sit amet.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":40.0,\"created_time\":\"2024-09-16T11:26:44-0300\",\"last_modified_time\":\"2024-09-16T11:26:44-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000092002\",\"project_name\":\"Project for Smitham and Sons\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"Curabitur vitae nunc sed velit.\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":4788.0,\"created_time\":\"2024-09-16T11:15:49-0300\",\"last_modified_time\":\"2024-09-16T11:15:49-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"custom_fields\":[]},{\"project_id\":\"5529788000000089889\",\"project_name\":\"Teste Project\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"customer_name\":\"Test Customer\",\"description\":\"\",\"can_be_invoiced\":true,\"status\":\"active\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":122.0,\"created_time\":\"2024-09-16T09:56:30-0300\",\"last_modified_time\":\"2024-09-16T09:56:30-0300\",\"has_attachment\":false,\"total_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"other_service_app_source\":\"\",\"users_working\":1,\"cf_pipeline\":\"CUSTOMER SUCCESS\",\"cf_pipeline_unformatted\":\"CUSTOMER SUCCESS\",\"custom_fields\":[{\"field_id\":\"5529788000000089391\",\"customfield_id\":\"5529788000000089391\",\"show_in_store\":false,\"show_in_portal\":false,\"is_active\":true,\"index\":1,\"label\":\"Pipeline\",\"show_on_pdf\":false,\"edit_on_portal\":false,\"edit_on_store\":false,\"api_name\":\"cf_pipeline\",\"show_in_all_pdf\":false,\"selected_option_id\":\"5529788000000089813\",\"value_formatted\":\"CUSTOMER SUCCESS\",\"search_entity\":\"project\",\"data_type\":\"dropdown\",\"placeholder\":\"cf_pipeline\",\"value\":\"CUSTOMER SUCCESS\",\"is_dependent_field\":false}]}],\"page_context\":{\"page\":1,\"per_page\":100,\"has_more_page\":false,\"report_name\":\"Projects\",\"applied_filter\":\"Status.All\",\"custom_fields\":[],\"sort_column\":\"project_name\",\"sort_order\":\"A\"}}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=991268d2286b23273795a6a0eb1f7ea9; Path=/,zbcscook=853a3b74-ba54-464d-a711-80491c3e2a83;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=853a3b74-ba54-464d-a711-80491c3e2a83;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=6F133ED1406289C6718C7240DF04DC59; Path=/; Secure; HttpOnly,BuildCookie_862560988=1; Max-Age=300; Expires=Mon, 16 Sep 2024 15:10:29 GMT; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 15:05:29 GMT",
+        "x-rate-limit-limit": "1000",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "x-rate-limit-remaining": "967",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "build_version": "Sep_13_2024_1_6886",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "allow": "OPTIONS, DELETE, POST, GET, PUT",
+        "client_build_version": "Sep_13_2024_1_6886",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "x-rate-limit-reset": "42870",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 200, "message": "" }
+    }
+  },
+  {
+    "duration": 561,
+    "recorded_at": "2024-09-16T12:05:29.992629",
+    "request": {
+      "body": "",
+      "headers": { "authorization": "******" },
+      "method": "DELETE",
+      "uri": "https://www.zohoapis.com/books/v3/projects/5529788000000108001?organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":0,\"message\":\"The project has been deleted\"}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=021c21f2be87755c8193333b509951c1; Path=/,zbcscook=4d8c1721-0b65-41bd-823c-abaac1aadfb2;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=4d8c1721-0b65-41bd-823c-abaac1aadfb2;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=BE39BEE5CAF32B702EDD8D3F1B132D2B; Path=/; Secure; HttpOnly,BuildCookie_862560988=1; Max-Age=300; Expires=Mon, 16 Sep 2024 15:10:29 GMT; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 15:05:29 GMT",
+        "x-rate-limit-limit": "1000",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "x-rate-limit-remaining": "966",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "build_version": "Sep_13_2024_1_6886",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "allow": "OPTIONS, DELETE, GET, PUT",
+        "client_build_version": "Sep_13_2024_1_6886",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "x-rate-limit-reset": "42870",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 200, "message": "" }
+    }
+  },
+  {
+    "duration": 198,
+    "recorded_at": "2024-09-16T12:05:30.206803",
+    "request": {
+      "body": "{\"project_name\":\"Project for McDermott-Stark\",\"customer_id\":\"5546603000000100003\",\"user_id\":\"5529788000000088001\",\"billing_type\":\"fixed_cost_for_project\",\"project_id\":\"5529788000000108001\",\"currency_code\":\"USD\",\"description\":\"Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque.\",\"rate\":\"1517\",\"cost_budget_amount\":1.0742185185522137}",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "authorization": "******"
+      },
+      "method": "PUT",
+      "uri": "https://www.zohoapis.com/books/v3/projects/5529788000000108001?organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":57,\"message\":\"You are not authorized to perform this operation\"}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=ce24632cb70e40997ad02cb1144b7265; Path=/,zbcscook=89eda6ad-9bf3-47c6-a3ed-d8a0fe0d000c;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=89eda6ad-9bf3-47c6-a3ed-d8a0fe0d000c;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=2AFEB3ABE6203CBA04C658DB07F8E7B6; Path=/; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 15:05:30 GMT",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "x-frame-options": "DENY",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-content-type-options": "nosniff",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 401, "message": "" }
+    }
+  }
+]

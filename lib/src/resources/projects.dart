@@ -77,8 +77,8 @@ class Projects extends BaseResource {
   }
 
   //OAuth Scope : ZohoBooks.projects.CREATE
-  Future<http.Response> clone(String projectId, ProjectCloneDTO project) async {
-    var uri = super.prepareUrl(pathSegment: '$projectId/clone');
+  Future<http.Response> clone(ProjectCloneDTO project) async {
+    var uri = super.prepareUrl(pathSegment: '${project.projectId}/clone');
     return await post(uri, project.toJson());
   }
 

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:test/test.dart';
 import 'package:faker/faker.dart';
 import '../test_setup.dart' as setup;
@@ -11,125 +10,284 @@ void main() {
   setup.main();
   late Projects projects;
   late oauth2.Client client;
-  setup.clientVCR = setup.createVCRClient("projects");
+  setup.cassettePath = "projects";
 
-  setUp(() async {
-    client = await setup.oauthClientProvider.init();
-    projects = Projects(client, setup.organizationId!);
-  });
+  setUp(() async {});
 
   group('Projects', () {
-    test('should create a project', () async {
+    test('should create a new project', () async {
+      //prepare the cassette
+      setup.clientVCR = setup.createVCRClient("projects_create");
+      //authenticate
+      client = await setup.oauthClientProvider
+          .init(overrideHttpClient: setup.clientVCR);
+      //prepare the projects client
+      projects = Projects(client, setup.organizationId!);
+
+      //create a new project
       final response = await createNewProject(projects);
+      var projectId =
+          json.decode(response.body)['project']['project_id'].toString();
+
+      var decodeResponse = json.decode(response.body);
+
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(201));
+      expect(decodeResponse['code'], 0);
+      expect(decodeResponse['message'], 'The project has been created.');
+
+      //delete the project
+      await projects.destroy(projectId);
     });
 
-    test('should get all projects', () async {
+    test('should get a list of projects', () async {
+      //GIVEN
+      //prepare the cassette to record the interaction
+      setup.clientVCR = setup.createVCRClient("projects_all");
+      //authenticate
+      client = await setup.oauthClientProvider
+          .init(overrideHttpClient: setup.clientVCR);
+      //prepare the projects client
+      projects = Projects(client, setup.organizationId!);
+      //create a new project
+      var projectResponse = await createNewProject(projects);
+      var projectId =
+          json.decode(projectResponse.body)['project']['project_id'].toString();
+
+      //WHEN
+      //get all projects with filters
       final response = await projects.all(queryParameters: {
         'sort_column': 'project_name',
         'sort_order': 'A',
         'filter_by': 'Status.All',
       });
 
+      //THEN
+      //check the response
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(200));
+
+      var decodeResponse = json.decode(response.body);
+      expect(decodeResponse['code'], 0);
+      expect(decodeResponse['message'], 'success');
+      expect(decodeResponse['projects'].length, greaterThan(0));
+      expect(decodeResponse['page_context']['applied_filter'], 'Status.All');
+      expect(decodeResponse['page_context']['sort_column'], 'project_name');
+      expect(decodeResponse['page_context']['sort_order'], 'A');
+
+      //delete the project
+      await projects.destroy(projectId);
     });
 
-    test('should update project', () async {
-      http.Response createResponse = await createNewProject(projects);
-      var projectId =
-          json.decode(createResponse.body)['project']['project_id'].toString();
+    test('should update a project', () async {
+      //GIVEN
+      //prepare the cassette to record the interaction
+      setup.clientVCR = setup.createVCRClient("projects_update");
+      //authenticate
+      client = await setup.oauthClientProvider
+          .init(overrideHttpClient: setup.clientVCR);
+      projects = Projects(client, setup.organizationId!);
+      //create a new project
+      var projectResponse = await createNewProject(projects);
+      var projectCreated = json.decode(projectResponse.body);
+      var projectId = projectCreated['project']['project_id'].toString();
 
+      //WHEN
       final project = ProjectDTO(
         projectId: projectId,
-        projectName: "Project for ${faker.company.name()}",
-        customerId: "5546603000000100003",
-        currencyCode: "USD",
-        description: faker.lorem.sentence(),
+        customerId: projectCreated['project']['customer_id'].toString(),
         billingType: "fixed_cost_for_project",
-        rate: faker.randomGenerator.integer(5000).toString(),
-        costBudgetAmount: faker.randomGenerator.decimal(scale: 2).toDouble(),
-        userId: "5546603000000088001",
+        userId: "5529788000000088001",
+        projectName: "New Project Name",
+        description: "New Description",
       );
 
       final response = await projects.update(project);
+
+      //THEN
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(200));
+
+      var decodeResponse = json.decode(response.body);
+      expect(decodeResponse['code'], 0);
+      expect(decodeResponse['message'],
+          'The project information has been updated.');
+      expect(decodeResponse['project']['project_name'], project.projectName);
+      expect(decodeResponse['project']['description'], project.description);
+
+      //delete the project
+      await projects.destroy(projectId);
     });
 
     test('should find one project', () async {
-      http.Response createResponse = await createNewProject(projects);
-      var projectId =
-          json.decode(createResponse.body)['project']['project_id'].toString();
+      //GIVEN
+      //prepare the cassette to record the interaction
+      setup.clientVCR = setup.createVCRClient("projects_find");
+      //authenticate
+      client = await setup.oauthClientProvider
+          .init(overrideHttpClient: setup.clientVCR);
+      projects = Projects(client, setup.organizationId!);
 
+      //create a new project
+      var projectResponse = await createNewProject(projects);
+      var projectCreated = json.decode(projectResponse.body);
+      var projectId = projectCreated['project']['project_id'].toString();
+
+      //WHEN
       final response = await projects.find(projectId);
+
+      //THEN
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(200));
+
+      var decodeResponse = json.decode(response.body);
+      expect(decodeResponse['code'], 0);
+      expect(decodeResponse['message'], 'success');
+      expect(decodeResponse['project']['project_id'], projectId);
+      expect(decodeResponse['project']['project_name'],
+          projectCreated['project']['project_name']);
+
+      //delete the project
+      await projects.destroy(projectId);
     });
 
-    test('destroy', () async {
-      http.Response createResponse = await createNewProject(projects);
-      var projectId =
-          json.decode(createResponse.body)['project']['project_id'].toString();
+    test('should activate a project', () async {
+      //GIVEN
+      //prepare the cassette to record the interaction
+      setup.clientVCR = setup.createVCRClient("projects_activate");
+      //authenticate
+      client = await setup.oauthClientProvider
+          .init(overrideHttpClient: setup.clientVCR);
+      projects = Projects(client, setup.organizationId!);
 
-      final response = await projects.destroy(projectId);
-      expect(response, isA<http.Response>());
-      expect(response.statusCode, equals(200));
-    });
+      //create a new project
+      var projectResponse = await createNewProject(projects);
+      var projectCreated = json.decode(projectResponse.body);
+      var projectId = projectCreated['project']['project_id'].toString();
 
-    test('activate', () async {
-      http.Response createResponse = await createNewProject(projects);
-      var projectId =
-          json.decode(createResponse.body)['project']['project_id'].toString();
-
+      //WHEN
       final response = await projects.activate(projectId);
+
+      //THEN
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(200));
+
+      var decodeResponse = json.decode(response.body);
+      expect(decodeResponse['code'], 0);
+      expect(decodeResponse['message'], 'The Project has been marked as active.');
+
+      //delete the project
+      await projects.destroy(projectId);
     });
+  });
 
-    test('inactivate', () async {
-      http.Response createResponse = await createNewProject(projects);
-      var projectId =
-          json.decode(createResponse.body)['project']['project_id'].toString();
+  test('should inactivate a project', () async {
+    //GIVEN
+      //prepare the cassette to record the interaction
+      setup.clientVCR = setup.createVCRClient("projects_inactivate");
+      //authenticate
+      client = await setup.oauthClientProvider
+          .init(overrideHttpClient: setup.clientVCR);
+      projects = Projects(client, setup.organizationId!);
 
+      //create a new project
+      var projectResponse = await createNewProject(projects);
+      var projectCreated = json.decode(projectResponse.body);
+      var projectId = projectCreated['project']['project_id'].toString();
+
+      //WHEN
       final response = await projects.inactivate(projectId);
+
+      //THEN
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(200));
-    });
 
-    test('clone', () async {
-      http.Response createResponse = await createNewProject(projects);
-      var projectId =
-          json.decode(createResponse.body)['project']['project_id'].toString();
+      var decodeResponse = json.decode(response.body);
+      expect(decodeResponse['code'], 0);
+      expect(decodeResponse['message'], 'The project has been marked as inactive.');
 
-      final project = ProjectCloneDTO(
-          projectName: 'Cloned project for ${faker.company.name()}');
-      final response = await projects.clone(projectId, project);
-      expect(response, isA<http.Response>());
-      expect(response.statusCode, equals(201));
-    });
+      //delete the project
+      await projects.destroy(projectId);
+  });
+
+  test('should clone a project', () async {
+    //GIVEN
+    //prepare the cassette to record the interaction
+    setup.clientVCR = setup.createVCRClient("projects_clone");
+    //authenticate
+    client = await setup.oauthClientProvider
+        .init(overrideHttpClient: setup.clientVCR);
+    projects = Projects(client, setup.organizationId!);
+
+    //create a new project
+    var projectResponse = await createNewProject(projects);
+    var projectCreated = json.decode(projectResponse.body);
+    var projectId = projectCreated['project']['project_id'].toString();
+
+    //WHEN  
+    final project = ProjectCloneDTO(
+        projectId: projectId,
+        projectName: 'Cloned project Name'
+    );
+
+    final response = await projects.clone(project);
+
+    //THEN
+    expect(response, isA<http.Response>());
+    expect(response.statusCode, equals(201));
+
+    var decodeResponse = json.decode(response.body);
+    expect(decodeResponse['code'], 0);
+    expect(decodeResponse['message'], 'Project has been cloned successfully.');
+    expect(decodeResponse['project']['project_name'], project.projectName);
+    expect(decodeResponse['project']['project_id'], isNot(projectId));
+
+    //delete the project
+    await projects.destroy(projectId);
+  });
+
+  test('should destroy a project', () async {
+    //GIVEN
+    //prepare the cassette to record the interaction
+    setup.clientVCR = setup.createVCRClient("projects_destroy");
+    //authenticate
+    client = await setup.oauthClientProvider
+        .init(overrideHttpClient: setup.clientVCR);
+    projects = Projects(client, setup.organizationId!);
+
+    //create a new project
+    var projectResponse = await createNewProject(projects);
+    var projectCreated = json.decode(projectResponse.body);
+    var projectId = projectCreated['project']['project_id'].toString();
+
+    //WHEN
+    final response = await projects.destroy(projectId);
+    expect(response, isA<http.Response>());
+    expect(response.statusCode, equals(200));
+
+    var decodeResponse = json.decode(response.body);
+    expect(decodeResponse['code'], 0);
+    expect(decodeResponse['message'], 'The project has been deleted');
   });
 }
 
 Future<http.Response> createNewProject(Projects projects) async {
   var project = ProjectDTO(
     projectName: "Project for ${faker.company.name()}",
-    customerId: "5546603000000100003",
+    customerId: "5529788000000089879", //Test Contact ID
     currencyCode: "USD",
     description: faker.lorem.sentence(),
     billingType: "fixed_cost_for_project",
     rate: faker.randomGenerator.integer(5000).toString(),
     costBudgetAmount: faker.randomGenerator.decimal(scale: 2).toDouble(),
-    userId: "5546603000000088001",
+    userId: "5529788000000088001", //My Zoho Books user ID
     users: [
       ProjectUserDTO(
-        userId: "5546603000000088001",
+        userId: "5529788000000088001", //My Zoho Books user ID
         userRole: "admin",
       ),
     ],
   );
 
-  final createResponse = await projects.create(project);
-  return createResponse;
+  return await projects.create(project);
 }

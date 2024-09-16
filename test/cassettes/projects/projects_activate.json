@@ -1,0 +1,158 @@
+[
+  {
+    "duration": 677,
+    "recorded_at": "2024-09-16T14:14:50.072932",
+    "request": {
+      "body": "grant_type=client_credentials&scope=ZohoBooks.fullaccess.all",
+      "headers": {
+        "Authorization": "******",
+        "content-type": "application/x-www-form-urlencoded; charset=utf-8"
+      },
+      "method": "POST",
+      "uri": "https://accounts.zoho.com/oauth/v2/token"
+    },
+    "response": {
+      "body": "{\"access_token\":\"******\",\"scope\":\"ZohoBooks.fullaccess.all\",\"api_domain\":\"https://www.zohoapis.com\",\"token_type\":\"Bearer\",\"expires_in\":3600}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_b266a5bf57=a7f15cb1555106de5ac96d088b72e7c8; Path=/,iamcsr=977048b3-4555-4f4f-beb9-e3f742e0dc88;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=977048b3-4555-4f4f-beb9-e3f742e0dc88;path=/;SameSite=Strict;Secure;priority=high",
+        "cache-control": "no-store",
+        "date": "Mon, 16 Sep 2024 17:14:52 GMT",
+        "strict-transport-security": "max-age=63072000",
+        "content-length": "204",
+        "x-frame-options": "SAMEORIGIN",
+        "pragma": "no-cache",
+        "content-type": "application/json;charset=UTF-8",
+        "content-language": "en-US",
+        "x-content-type-options": "nosniff",
+        "server": "ZGS",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 200, "message": "" }
+    }
+  },
+  {
+    "duration": 813,
+    "recorded_at": "2024-09-16T14:14:50.932577",
+    "request": {
+      "body": "{\"project_name\":\"Project for Kulas LLC\",\"customer_id\":\"5529788000000089879\",\"user_id\":\"5529788000000088001\",\"billing_type\":\"fixed_cost_for_project\",\"currency_code\":\"USD\",\"description\":\"Congue mauris rhoncus aenean vel elit.\",\"rate\":\"2231\",\"cost_budget_amount\":1.5063449622867828,\"users\":[{\"user_id\":\"5529788000000088001\",\"user_role\":\"admin\"}]}",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "authorization": "******"
+      },
+      "method": "POST",
+      "uri": "https://www.zohoapis.com/books/v3/projects?organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":0,\"message\":\"The project has been created.\",\"project\":{\"project_id\":\"5529788000000112001\",\"project_name\":\"Project for Kulas LLC\",\"project_code\":\"\",\"customer_id\":\"5529788000000089879\",\"currency_id\":\"5529788000000088101\",\"customer_name\":\"Test Customer\",\"customer_first_name\":\"FirstName\",\"customer_email\":\"test@fastdezine.com\",\"photo_url\":\"https://secure.gravatar.com/avatar/311a02024fa01d2bd078a66ad8b4f9ff?&d=mm\",\"currency_code\":\"BRL\",\"description\":\"Congue mauris rhoncus aenean vel elit.\",\"status\":\"active\",\"billing_rate_frequency\":\"fixed\",\"billing_type\":\"fixed_cost_for_project\",\"rate\":2231.0,\"is_from_zoho_projects\":false,\"budget_type\":\"\",\"budget_amount\":0.0,\"cost_budget_amount\":1.506,\"is_budget_threshold_notification_enabled\":false,\"is_client_approval_needed\":false,\"is_user_approval_needed\":false,\"hours_per_day\":\"00:00\",\"project_head_id\":\"\",\"project_head_name\":\"\",\"is_valid_project_head\":true,\"budget_threshold\":80.0,\"budget_threshold_formatted\":\"80.00%\",\"is_expense_inclusive\":0,\"total_hours\":\"00:00\",\"total_amount\":2231.0,\"total_amount_expense_inclusive\":\"\",\"billed_hours\":\"00:00\",\"billed_amount\":\"0.00\",\"un_billed_hours\":\"00:00\",\"un_billed_amount\":\"2231.000\",\"billable_hours\":\"00:00\",\"billable_amount\":0.0,\"non_billable_hours\":\"00:00\",\"non_billable_amount\":0.0,\"unused_retainer_payments\":0.0,\"has_active_recurring_profiles\":false,\"created_by_id\":\"5529788000000088001\",\"last_modified_by_id\":\"5529788000000088001\",\"created_time\":\"2024-09-16T14:14:52-0300\",\"zohopeople_project_id\":\"\",\"is_from_zoho_people\":false,\"zohoworkerly_project_id\":\"\",\"show_in_dashboard\":false,\"accounts_budgets\":[],\"tasks\":[],\"users\":[{\"user_id\":\"5529788000000088001\",\"is_current_user\":true,\"user_name\":\"Gabriel Fastdzine\",\"email\":\"gabrielsilva.fastdezine@gmail.com\",\"user_role\":\"admin\",\"role_id\":\"5529788000000000619\",\"status\":\"active\",\"rate\":0.0,\"budget_hours\":0,\"budget_hours_in_time\":\"00:00\",\"total_hours\":\"00:00\",\"billed_hours\":\"00:00\",\"un_billed_hours\":\"00:00\",\"billable_hours\":\"00:00\",\"non_billable_hours\":\"00:00\",\"staff_role\":\"staff\",\"staff_status\":\"active\"}],\"custom_fields\":[],\"custom_field_hash\":{},\"documents\":[]}}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=7e93ec2dd17e8e24045e8272f0f842d3; Path=/,zbcscook=20da6137-b786-4cac-93a1-4b2c22dded0d;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=20da6137-b786-4cac-93a1-4b2c22dded0d;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=A890D787634C157E4C6D638F19F59724; Path=/; Secure; HttpOnly,BuildCookie_862560988=1; Max-Age=300; Expires=Mon, 16 Sep 2024 17:19:53 GMT; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 17:14:53 GMT",
+        "x-rate-limit-limit": "1000",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "x-rate-limit-remaining": "951",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "location": "/api/v3/projects/5529788000000112001",
+        "build_version": "Sep_13_2024_1_6886",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "allow": "OPTIONS, DELETE, POST, GET, PUT",
+        "client_build_version": "Sep_13_2024_1_6886",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "x-rate-limit-reset": "35107",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 201, "message": "" }
+    }
+  },
+  {
+    "duration": 343,
+    "recorded_at": "2024-09-16T14:14:51.283182",
+    "request": {
+      "body": "{}",
+      "headers": {
+        "content-type": "text/plain; charset=utf-8",
+        "authorization": "******"
+      },
+      "method": "POST",
+      "uri": "https://www.zohoapis.com/books/v3/projects/5529788000000112001/active?organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":0,\"message\":\"The Project has been marked as active.\"}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=2de9d21a58fcc8346b125d39fcb89cc8; Path=/,zbcscook=5f139bcf-a3a7-4f36-aef3-41bd39de9ac2;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=5f139bcf-a3a7-4f36-aef3-41bd39de9ac2;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=983D29EDF97050499DF29A91868FBB7B; Path=/; Secure; HttpOnly,BuildCookie_862560988=1; Max-Age=300; Expires=Mon, 16 Sep 2024 17:19:53 GMT; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 17:14:53 GMT",
+        "x-rate-limit-limit": "1000",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "x-rate-limit-remaining": "950",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "build_version": "Sep_13_2024_1_6886",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "allow": "OPTIONS, POST",
+        "client_build_version": "Sep_13_2024_1_6886",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "x-rate-limit-reset": "35106",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 200, "message": "" }
+    }
+  },
+  {
+    "duration": 380,
+    "recorded_at": "2024-09-16T14:14:51.667961",
+    "request": {
+      "body": "",
+      "headers": { "authorization": "******" },
+      "method": "DELETE",
+      "uri": "https://www.zohoapis.com/books/v3/projects/5529788000000112001?organization_id=862560988"
+    },
+    "response": {
+      "body": "{\"code\":0,\"message\":\"The project has been deleted\"}",
+      "headers": {
+        "connection": "keep-alive",
+        "set-cookie": "zalb_ba05f91d88=069e8774bcce3e9ccd266e7cc2a5d937; Path=/,zbcscook=cf6df62c-66fd-4e32-a890-22f21236de14;path=/;SameSite=None;Secure;priority=high,_zcsr_tmp=cf6df62c-66fd-4e32-a890-22f21236de14;path=/;SameSite=Strict;Secure;priority=high,JSESSIONID=49A9467E1B666469185E97E9F905C735; Path=/; Secure; HttpOnly,BuildCookie_862560988=1; Max-Age=300; Expires=Mon, 16 Sep 2024 17:19:53 GMT; Secure; HttpOnly",
+        "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+        "transfer-encoding": "chunked",
+        "date": "Mon, 16 Sep 2024 17:14:53 GMT",
+        "x-rate-limit-limit": "1000",
+        "content-encoding": "gzip",
+        "vary": "accept-encoding",
+        "strict-transport-security": "max-age=63072000",
+        "x-rate-limit-remaining": "949",
+        "content-type": "application/json;charset=UTF-8",
+        "pragma": "no-cache",
+        "server": "ZGS",
+        "content-disposition": "attachment;",
+        "build_version": "Sep_13_2024_1_6886",
+        "server_build_version": "Sep_16_2024_18272/",
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "allow": "OPTIONS, DELETE, GET, PUT",
+        "client_build_version": "Sep_13_2024_1_6886",
+        "expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "x-rate-limit-reset": "35106",
+        "X-Via-DartVCR-Recording": "true"
+      },
+      "status": { "code": 200, "message": "" }
+    }
+  }
+]

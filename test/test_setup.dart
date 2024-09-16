@@ -11,6 +11,7 @@ late Region region;
 late List<String> scopes;
 late DartVCRClient clientVCR;
 late OauthClientProvider oauthClientProvider;
+String cassettePath = "";
 
 void main() {
   var env = DotEnv(includePlatformEnvironment: true)..load(['test/.env']);
@@ -44,8 +45,9 @@ void main() {
 }
 
 DartVCRClient createVCRClient(String cassetteName) {
+  
   // Create a cassette to handle HTTP interactions
-  var cassette = Cassette("test/cassettes", cassetteName);
+  var cassette = Cassette("test/cassettes/$cassettePath", cassetteName);
 
   // Hide the Authorization header
   var censors = Censors().censorHeaderElementsByKeys(["authorization"]);
@@ -56,7 +58,7 @@ DartVCRClient createVCRClient(String cassetteName) {
   var advancedOptions = AdvancedOptions(censors: censors);
 
   // create an DartVCRClient using the cassette
-  return DartVCRClient(cassette, Mode.record, advancedOptions: advancedOptions);
+  return DartVCRClient(cassette, Mode.auto, advancedOptions: advancedOptions);
 }
 
 String? getEnvironmentVariable(DotEnv env, String key) {

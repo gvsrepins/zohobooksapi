@@ -29,19 +29,19 @@ class OauthClientProvider {
   }
 
   // Setup the Oauth2 client
-  Future<oauth2.Client> _init() async {
+  Future<oauth2.Client> _init(http.Client? overrideHttpClient) async {
     return await oauth2.clientCredentialsGrant(
       authorizationEndpoint, 
       identifier, 
       secret, 
       scopes: scopes,
-      httpClient: httpClient
+      httpClient: overrideHttpClient ?? httpClient
     );
   }
   
   //Get the Oauth client
-  Future<oauth2.Client> init() async {    
-    return _init();
+  Future<oauth2.Client> init({http.Client? overrideHttpClient}) async {    
+    return _init(overrideHttpClient);
   }
 
 }

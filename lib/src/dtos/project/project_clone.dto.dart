@@ -1,9 +1,11 @@
 class ProjectCloneDTO {
-  
+
+  String projectId; // Required
   String projectName; // Required
   String description;
   
   ProjectCloneDTO({
+    required this.projectId,
     required this.projectName,
     this.description = ''
   }) {
