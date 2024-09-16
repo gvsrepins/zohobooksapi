@@ -208,9 +208,7 @@ void main() {
   });
 }
 
-
 Future<http.Response> createNewProject(projects) async {
-
   var project = ProjectDTO(
     projectName: "Project for ${faker.company.name()}",
     customerId:
@@ -234,7 +232,7 @@ Future<http.Response> createNewProject(projects) async {
 }
 
 Future<Projects> prepareVCRClient(cassetteName) async {
-   setup.clientVCR = setup.createVCRClient(cassetteName);
+  setup.clientVCR = setup.createVCRClient(cassetteName);
   //authenticate
   var client =
       await setup.oauthClientProvider.init(overrideHttpClient: setup.clientVCR);

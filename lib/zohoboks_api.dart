@@ -12,6 +12,7 @@ export 'src/enums/region.dart';
 //Resources
 export 'src/resources/projects.dart';
 export 'src/resources/base_resource.dart';
+export 'src/resources/bills.dart';
 
 //DTOs
 //projects

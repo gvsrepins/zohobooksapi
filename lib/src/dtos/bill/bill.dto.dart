@@ -1,12 +1,14 @@
 import 'package:zohobooks_api/zohoboks_api.dart';
+import 'package:intl/intl.dart';
+
 
 class BillDTO {
   String vendorId;  // Required
   String billNumber;  // Required
-  String date;  // Required
-  String dueDate;  // Required
 
   String? billId;
+  DateTime? date;  // Required
+  DateTime? dueDate;  // Required
   List<String>? purchaseorderIds;
   String? vendorName;
   String? vatTreatment;
@@ -26,7 +28,7 @@ class BillDTO {
   String? status;
   int? paymentTerms;
   String? paymentTermsLabel;
-  String? paymentExpectedDate;
+  DateTime? paymentExpectedDate;
   String? referenceNumber;
   String? recurringBillId;
   String? dueByDays;
@@ -76,9 +78,9 @@ class BillDTO {
   BillDTO({
     required this.vendorId,
     required this.billNumber,
-    required this.date,
-    required this.dueDate,
     this.billId,
+    this.date,
+    this.dueDate,
     this.purchaseorderIds,
     this.vendorName,
     this.vatTreatment,
@@ -147,8 +149,6 @@ class BillDTO {
   }) {
     // Add validation checks here
     _validateBillNumberLength(billNumber);
-    _validateDateFormat(date);
-    _validateDateFormat(dueDate);
     _validateNonNegativeValue(exchangeRate, 'exchangeRate');
     _validateNonNegativeValue(subTotal, 'subTotal');
     _validateNonNegativeValue(total, 'total');
@@ -157,14 +157,6 @@ class BillDTO {
   void _validateBillNumberLength(String number) {
     if (number.length > 50) {
       throw ArgumentError('Bill number must be at most 50 characters long.');
-    }
-  }
-
-  void _validateDateFormat(String date) {
-    // Simple date format validation (YYYY-MM-DD)
-    final RegExp dateRegex = RegExp(r'^\d{4}-\d{2}-\d{2}$');
-    if (!dateRegex.hasMatch(date)) {
-      throw ArgumentError('Date must be in the format YYYY-MM-DD.');
     }
   }
 
@@ -181,10 +173,11 @@ class BillDTO {
 
     data['vendor_id'] = vendorId;
     data['bill_number'] = billNumber;
-    data['date'] = date;
-    data['due_date'] = dueDate;
 
     // Add to map only if not null
+    if (date != null) data['date'] = DateFormat('yyyy-MM-d').format(date!);
+    if (dueDate != null) data['due_date'] = DateFormat('yyyy-MM-d').format(dueDate!);
+    
     if (billId != null) data['bill_id'] = billId;
     if (purchaseorderIds != null) data['purchaseorder_ids'] = purchaseorderIds;
     if (vendorName != null) data['vendor_name'] = vendorName;
@@ -205,7 +198,7 @@ class BillDTO {
     if (status != null) data['status'] = status;
     if (paymentTerms != null) data['payment_terms'] = paymentTerms;
     if (paymentTermsLabel != null) data['payment_terms_label'] = paymentTermsLabel;
-    if (paymentExpectedDate != null) data['payment_expected_date'] = paymentExpectedDate;
+    if (paymentExpectedDate != null) data['payment_expected_date'] = DateFormat('yyyy-MM-d').format(paymentExpectedDate!);
     if (referenceNumber != null) data['reference_number'] = referenceNumber;
     if (recurringBillId != null) data['recurring_bill_id'] = recurringBillId;
     if (dueByDays != null) data['due_by_days'] = dueByDays;

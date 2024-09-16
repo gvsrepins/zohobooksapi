@@ -1,7 +1,9 @@
 import 'package:zohobooks_api/zohoboks_api.dart';
 import 'package:http/http.dart' as http;
 
+//TODO: Add tests for Bills resource
 class Bills extends BaseResource {
+  
   Map<String, dynamic> queryParameters = {
     'sort_column': 'created_time',
     'sort_order': 'D',
