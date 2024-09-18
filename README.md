@@ -101,7 +101,7 @@ dart test
 - [x] Base resources
 - [x] Projects resources
 - [x] Bills resources
-- [ ] Contacts resources
+- [x] Contacts resources
 - [ ] Estimates resources
 - [ ] Sales orders resources
 - [ ] Invoices resources

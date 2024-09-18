@@ -13,12 +13,17 @@ export 'src/enums/region.dart';
 export 'src/resources/projects.dart';
 export 'src/resources/base_resource.dart';
 export 'src/resources/bills.dart';
+export 'src/resources/contacts.dart';
 
 //DTOs
 //projects
 export 'src/dtos/project/project.dto.dart';
 export 'src/dtos/project/project_clone.dto.dart';
 export 'src/dtos/project/project_user.dto.dart';
+
+//contacts
+export 'src/dtos/contact/contact.dto.dart';
+
 //bills
 export 'src/dtos/bill/bill.dto.dart';
 export 'src/dtos/bill/bill_line_item.dto.dart';

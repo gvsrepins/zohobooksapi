@@ -173,7 +173,7 @@ void main() {
 
       //WHEN
       final project = ProjectCloneDTO(
-          projectId: projectId, projectName: 'NEW cloned project Name');
+          projectId: projectId, projectName: 'Cloned project Name');
       final response = await projects.clone(project);
 
       //THEN
@@ -211,6 +211,29 @@ void main() {
       expect(decodeResponse['message'], 'The project has been deleted');
     });
   });
+
+  // test('should assign users to a project', () async {
+  //   //GIVEN
+  //   var projects = await prepareProjectsVCRClient('projects_assign_users');
+  //   var projectResponse = await createNewProject(projects);
+  //   var projectCreated = json.decode(projectResponse.body);
+  //   var projectId = projectCreated['project']['project_id'].toString();
+
+  //   //WHEN
+  //   var userProject = ProjectUserDTO({      
+  //     'user_id': '5529788000000088001',
+  //     'rate': '100',
+  //   });
+
+  //   final response = await projects.assignUser(projectId, userProject);
+
+  //   //THEN
+  //   var decodeResponse = json.decode(response.body);
+  //   expect(response, isA<http.Response>());
+  //   expect(response.statusCode, equals(200));
+  //   expect(decodeResponse['code'], 0);
+  //   //expect(decodeResponse['message'], 'The project has been updated.');
+  // });
 }
 
 Future<http.Response> createNewProject(projects) async {
