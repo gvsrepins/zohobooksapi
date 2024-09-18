@@ -8,12 +8,12 @@ import 'package:zohobooks_api/zohoboks_api.dart';
 
 void main() {
   setup.main();
-  setup.cassettePath = "projects";
+  setup.cassettePath = 'projects';
 
   group('Projects resource', () {
     test('should create a new project', () async {
       //WHEN
-      var projects = await prepareVCRClient('projects_create');
+      var projects = await prepareProjectsVCRClient('projects_create');
       var response = await createNewProject(projects);
       var projectCreated = json.decode(response.body);
       var projectId = projectCreated['project']['project_id'].toString();
@@ -31,7 +31,7 @@ void main() {
 
     test('should get a list of projects', () async {
       //GIVEN
-      var projects = await prepareVCRClient('projects_all');
+      var projects = await prepareProjectsVCRClient('projects_all');
       var projectResponse = await createNewProject(projects);
       var projectId =
           json.decode(projectResponse.body)['project']['project_id'].toString();
@@ -63,20 +63,20 @@ void main() {
 
     test('should update a project', () async {
       //GIVEN
-      var projects = await prepareVCRClient('projects_update');
+      var projects = await prepareProjectsVCRClient('projects_update');
       var projectResponse = await createNewProject(projects);
       var projectCreated = json.decode(projectResponse.body);
       var projectId = projectCreated['project']['project_id'].toString();
 
       //WHEN
-      final project = ProjectDTO(
-        projectId: projectId,
-        customerId: projectCreated['project']['customer_id'].toString(),
-        billingType: "fixed_cost_for_project",
-        userId: "5529788000000088001",
-        projectName: "New Project Name",
-        description: "New Description",
-      );
+      final project = ProjectDTO({
+        'project_id': projectId,
+        'customer_id': projectCreated['project']['customer_id'].toString(),
+        'billing_type': 'fixed_cost_for_project',
+        'user_id': '5529788000000088001',
+        'project_name': 'New Project Name',
+        'description': 'New Description',
+      });
       final response = await projects.update(project);
 
       //THEN
@@ -86,8 +86,10 @@ void main() {
       expect(decodeResponse['code'], 0);
       expect(decodeResponse['message'],
           'The project information has been updated.');
-      expect(decodeResponse['project']['project_name'], project.projectName);
-      expect(decodeResponse['project']['description'], project.description);
+      expect(decodeResponse['project']['project_name'],
+          project.getAttribute('project_name'));
+      expect(decodeResponse['project']['description'],
+          project.getAttribute('description'));
 
       //delete the project
       await projects.destroy(projectId);
@@ -96,7 +98,7 @@ void main() {
     test('should find one project', () async {
       //GIVEN
       //create a new project
-      var projects = await prepareVCRClient('projects_find');
+      var projects = await prepareProjectsVCRClient('projects_find');
       var projectResponse = await createNewProject(projects);
       var projectCreated = json.decode(projectResponse.body);
       var projectId = projectCreated['project']['project_id'].toString();
@@ -120,7 +122,7 @@ void main() {
 
     test('should activate a project', () async {
       //GIVEN
-      var projects = await prepareVCRClient('projects_activate');
+      var projects = await prepareProjectsVCRClient('projects_activate');
       var projectResponse = await createNewProject(projects);
       var projectCreated = json.decode(projectResponse.body);
       var projectId = projectCreated['project']['project_id'].toString();
@@ -142,7 +144,7 @@ void main() {
 
     test('should inactivate a project', () async {
       //GIVEN
-      var projects = await prepareVCRClient('projects_inactivate');
+      var projects = await prepareProjectsVCRClient('projects_inactivate');
       var projectResponse = await createNewProject(projects);
       var projectCreated = json.decode(projectResponse.body);
       var projectId = projectCreated['project']['project_id'].toString();
@@ -164,33 +166,36 @@ void main() {
 
     test('should clone a project', () async {
       //GIVEN
-      var projects = await prepareVCRClient('projects_clone');
+      var projects = await prepareProjectsVCRClient('projects_clone');
       var projectResponse = await createNewProject(projects);
       var projectCreated = json.decode(projectResponse.body);
       var projectId = projectCreated['project']['project_id'].toString();
 
       //WHEN
       final project = ProjectCloneDTO(
-          projectId: projectId, projectName: 'Cloned project Name');
+          projectId: projectId, projectName: 'NEW cloned project Name');
       final response = await projects.clone(project);
 
       //THEN
       var decodeResponse = json.decode(response.body);
+      var projectClonedId = decodeResponse['project']['project_id'].toString();
+
       expect(response, isA<http.Response>());
       expect(response.statusCode, equals(201));
       expect(decodeResponse['code'], 0);
       expect(
           decodeResponse['message'], 'Project has been cloned successfully.');
       expect(decodeResponse['project']['project_name'], project.projectName);
-      expect(decodeResponse['project']['project_id'], isNot(projectId));
+      expect(projectClonedId, isNot(projectId));
 
-      //delete the project
+      //Revert the clone
+      await projects.destroy(projectClonedId);
       await projects.destroy(projectId);
     });
 
     test('should destroy a project', () async {
       //GIVEN
-      var projects = await prepareVCRClient('projects_destroy');
+      var projects = await prepareProjectsVCRClient('projects_destroy');
       var projectResponse = await createNewProject(projects);
       var projectCreated = json.decode(projectResponse.body);
       var projectId = projectCreated['project']['project_id'].toString();
@@ -209,29 +214,31 @@ void main() {
 }
 
 Future<http.Response> createNewProject(projects) async {
-  var project = ProjectDTO(
-    projectName: "Project for ${faker.company.name()}",
-    customerId:
-        "5529788000000089879", //TODO: create a new contact and use it here
-    currencyCode: "USD",
-    description: faker.lorem.sentence(),
-    billingType: "fixed_cost_for_project",
-    rate: faker.randomGenerator.integer(5000).toString(),
-    costBudgetAmount: faker.randomGenerator.decimal(scale: 2).toDouble(),
-    userId: "5529788000000088001", //TODO: This needs to be set on a config file
-    users: [
-      ProjectUserDTO(
-        userId:
-            "5529788000000088001", //TODO: This needs to be set on a config file
-        userRole: "admin",
-      ),
+  //TODO: This needs to be set on a config file
+  var userId = '5529788000000088001';
+  var customerId = '5529788000000089879';
+
+  var project = ProjectDTO({
+    'project_name': 'Project for ${faker.company.name()}',
+    'customer_id': customerId,
+    'currency_code': 'USD',
+    'description': faker.lorem.sentence(),
+    'billing_type': 'fixed_cost_for_project',
+    'rate': faker.randomGenerator.integer(5000).toString(),
+    'cost_budget_amount': faker.randomGenerator.decimal(scale: 2).toString(),
+    'user_id': userId,
+    'users': [
+      {
+        'user_id': userId,
+        'user_role': 'admin',
+      },
     ],
-  );
+  });
 
   return await projects.create(project);
 }
 
-Future<Projects> prepareVCRClient(cassetteName) async {
+Future<Projects> prepareProjectsVCRClient(cassetteName) async {
   setup.clientVCR = setup.createVCRClient(cassetteName);
   //authenticate
   var client =

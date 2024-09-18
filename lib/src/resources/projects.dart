@@ -22,11 +22,10 @@ class Projects extends BaseResource {
 
   //OAuth Scope : ZohoBooks.projects.CREATE
   Future<http.Response> create(ProjectDTO project) async {
-
-    if(project.projectId != null) {
+    if (project.getAttribute('project_id') != null) {
       throw ArgumentError('Project ID cannot be set while creating a project');
     }
-    
+
     var uri = super.prepareUrl();
     return post(uri, project.toJson());
   }
@@ -43,12 +42,11 @@ class Projects extends BaseResource {
 
   //OAuth Scope : ZohoBooks.projects.UPDATE
   Future<http.Response> update(ProjectDTO project) async {
-    
-    if(project.projectId == null) {
+    if (project.getAttribute('project_id') == null) {
       throw ArgumentError('Project ID is required');
     }
 
-    var uri = super.prepareUrl(pathSegment: project.projectId);
+    var uri = super.prepareUrl(pathSegment: project.getAttribute('project_id'));
     return await put(uri, project.toJson());
   }
 
@@ -82,8 +80,9 @@ class Projects extends BaseResource {
     return await post(uri, project.toJson());
   }
 
-  //TODO: test the methods bellow
-  Future<http.Response> addUser(String projectId, ProjectUserDTO user) async {
+  //OAuth Scope : ZohoBooks.projects.CREATE
+  Future<http.Response> assignUser(
+      String projectId, ProjectUserDTO user) async {
     var uri = super.prepareUrl(pathSegment: '$projectId/users');
     return await post(uri, user.toJson());
   }

@@ -21,17 +21,17 @@ Future<void> main() async {
     organizationId: organizationId
   );
 
-  var project = ProjectDTO(
-    projectName: "New Project Name",
-    customerId: "5546603000000100003",
-    currencyCode: "USD",
-    description:
+  var project = ProjectDTO({
+    'project_name': "New Project Name",
+    'customer_id': "5546603000000100003",
+    'currency_code': "USD",
+    'description':
         "A simple algorithm is to be tested with vehicle detection application.",
-    billingType: "fixed_cost_for_project",
-    rate: "500",
-    costBudgetAmount: 600.00,
-    userId: "INV-00003",
-  );
+    'billing_type': "fixed_cost_for_project",
+    'rate': "500",
+    'cost_budget_amount': 600.00,
+    'user_id': "INV-00003",
+  });
 
   print(project.toJson());
 
