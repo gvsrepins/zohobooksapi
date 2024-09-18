@@ -1,5 +1,3 @@
-import 'dart:mirrors';
-
 import 'package:oauth2/oauth2.dart' as oauth2;
 import 'package:zohobooks_api/zohoboks_api.dart';
 
@@ -7,89 +5,61 @@ class ZohoBooks {
   late final oauth2.Client oauthClient;
   final String organizationId;
 
-  Projects get projects =>
-      projects = _createResource('Projects', [oauthClient, organizationId]);
-
-  set projects(Projects value) {}
-
-  final Map<String, String> _availableResources = {
-    'contacts': 'Contacts',
-    'estimates': 'Estimates',
-    'salesorders': 'SalesOrders',
-    'invoices': 'Invoices',
-    'recurringinvoices': 'RecurringInvoices',
-    'creditnotes': 'CreditNotes',
-    'customerpayments': 'CustomerPayments',
-    'expenses': 'Expenses',
-    'recurringexpenses': 'RecurringExpenses',
-    'purchaseorders': 'PurchaseOrders',
-    'bills': 'Bills',
-    'vendorcredits': 'VendorCredits',
-    'vendorpayments': 'VendorPayments',
-    'bankaccounts': 'BankAccounts',
-    'banktransactions': 'BankTransactions',
-    'bankrules': 'BankRules',
-    'chartofaccounts': 'ChartOfAccounts',
-    'journals': 'Journals',
-    'basecurrencyadjustment': 'BaseCurrencyAdjustment',
-    'projects': 'Projects',
-    'settings': 'Settings',
-    'organizations': 'Organizations',
-    'items': 'Items',
-    'users': 'Users',
-    'import': 'Import',
-  };
-
   ZohoBooks({required this.oauthClient, required this.organizationId});
 
-  // Factory function to create instances based on a type string using reflection
-  dynamic _createResource(String resourceName, List<dynamic> args) {
-    // Get the current mirror system
-    MirrorSystem mirrorSystem = currentMirrorSystem();
+  Projects get projects => Projects(oauthClient, organizationId);
+  Bills get bills => Bills(oauthClient, organizationId);
+  Contacts get contacts => Contacts(oauthClient, organizationId);
+  //Estimates get estimates => Estimates(oauthClient, organizationId);
+  //SalesOrders get salesOrders => SalesOrders(oauthClient, organizationId);
+  //Invoices get invoices => Invoices(oauthClient, organizationId);
+  //RecurringInvoices get recurringInvoices => RecurringInvoices(oauthClient, organizationId);
+  //CreditNotes get creditNotes => CreditNotes(oauthClient, organizationId);
+  //CustomerPayments get customerPayments => CustomerPayments(oauthClient, organizationId);
+  //Expenses get expenses => Expenses(oauthClient, organizationId);
+  //RecurringExpenses get recurringExpenses => RecurringExpenses(oauthClient, organizationId);
+  //PurchaseOrders get purchaseOrders => PurchaseOrders(oauthClient, organizationId);
+  //VendorCredits get vendorCredits => VendorCredits(oauthClient, organizationId);
+  //VendorPayments get vendorPayments => VendorPayments(oauthClient, organizationId);
+  //BankAccounts get bankAccounts => BankAccounts(oauthClient, organizationId);
+  //BankTransactions get bankTransactions => BankTransactions(oauthClient, organizationId);
+  //BankRules get bankRules => BankRules(oauthClient, organizationId);
+  //ChartOfAccounts get chartOfAccounts => ChartOfAccounts(oauthClient, organizationId);
+  //Journals get journals => Journals(oauthClient, organizationId);
+  //BaseCurrencyAdjustment get baseCurrencyAdjustment => BaseCurrencyAdjustment(oauthClient, organizationId);
+  //Settings get settings => Settings(oauthClient, organizationId);
+  //Organizations get organizations => Organizations(oauthClient, organizationId);
+  //Items get items => Items(oauthClient, organizationId);
+  //Users get users => Users(oauthClient, organizationId);
+  //Import get import => Import(oauthClient, organizationId);
 
-    if (_availableResources[resourceName.toLowerCase()] == null) {
-      throw ArgumentError('Resource "$resourceName" not found in resources map.');
-    }
 
-    // Retrieve the library URI from the map using the type as the key
-    String libraryUri = '$resourceName.dart'.toLowerCase();
+  set projects(Projects value) {}
+  set contacts(Contacts value) {}
+  set bills(Bills value) {}
+  //set estimates(Estimates value) {}
+  //set invoices(Invoices value) {}
+  //set recurringInvoices(Recurring
+  //set creditNotes(CreditNotes value) {}
+  //set customerPayments(CustomerPayments value) {}
+  //set expenses(Expenses value) {}
+  //set recurringExpenses(RecurringExpenses value) {}
+  //set purchaseOrders(PurchaseOrders value) {}
+  //set vendorCredits(VendorCredits value) {}
+  //set vendorPayments(VendorPayments value) {}
+  //set bankAccounts(BankAccounts value) {}
+  //set bankTransactions(BankTransactions value) {}
+  //set bankRules(BankRules value) {}
+  //set chartOfAccounts(ChartOfAccounts value) {}
+  //set journals(Journals value) {}
+  //set baseCurrencyAdjustment(BaseCurrencyAdjustment value) {} 
+  //set settings(Settings value) {}
+  //set organizations(Organizations value) {}
+  //set items(Items value) {}
+  //set users(Users value) {}
+  //set import(Import value) {}
+  //set settings(Settings value) {}
+  //set organizations(Organizations value) {}
 
-    // Find the specific library by its URI
-    LibraryMirror libraryMirror = mirrorSystem.libraries.values.firstWhere(
-      (lib) => lib.uri.toString().contains(libraryUri),
-      orElse: () =>
-          throw ArgumentError('Module with URI "$libraryUri" not found.'),
-    );
 
-    // Check if the class exists in this library
-    if (libraryMirror.declarations.containsKey(Symbol(resourceName))) {
-      // Get the class mirror by the class name (type)
-      ClassMirror classMirror =
-          libraryMirror.declarations[Symbol(resourceName)] as ClassMirror;
-
-      // Dynamically create the instance using the class mirror and the provided arguments
-      return classMirror.newInstance(Symbol(''), args).reflectee;
-    }
-
-    throw ArgumentError('Class "$resourceName" not found in library "$libraryUri".');
-  }
-
-  // Define a custom getter using noSuchMethod
-  @override
-  dynamic noSuchMethod(Invocation invocation) {
-    if (invocation.isGetter) {
-      var memberName = _getMemberName(invocation.memberName);
-
-      if (_availableResources[memberName] != null) {
-        return _createResource(memberName, [oauthClient, organizationId]);
-      }
-    }
-
-    super.noSuchMethod(invocation);
-  }
-
-  // Helper method to extract the member name as a string
-  String _getMemberName(Symbol symbol) {
-    return symbol.toString().split('"')[1];
-  }
 }

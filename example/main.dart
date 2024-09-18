@@ -1,5 +1,6 @@
 import 'package:dotenv/dotenv.dart';
 import 'package:zohobooks_api/zohoboks_api.dart';
+import 'package:http/http.dart' as http;
 
 Future<void> main() async {
   var env = DotEnv(includePlatformEnvironment: true)..load();
@@ -29,20 +30,19 @@ Future<void> main() async {
         "A simple algorithm is to be tested with vehicle detection application.",
     'billing_type': "fixed_cost_for_project",
     'rate': "500",
-    'cost_budget_amount': 600.00,
+    'cost_budget_amount': '600.00',
     'user_id': "INV-00003",
   });
 
   print(project.toJson());
 
   // Clone project
-  var response = await zohoBooks.projects.create(project);
-
-  // response = await zohoBooks.projects.all(queryParameters: {
-  //   'sort_column': 'project_name',
-  //   'sort_order': 'A',
-  //   'filter_by': 'Status.All',
-  // });
+  //http.Response response = await zohoBooks.projects.create(project);
+  http.Response response = await zohoBooks.projects.all(queryParameters: {
+    'sort_column': 'project_name',
+    'sort_order': 'A',
+    'filter_by': 'Status.All',
+  });
 
   // Clone project
   // var response = await zohoBooks.projects.clone(
