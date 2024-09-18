@@ -81,11 +81,26 @@ class ContactDTO {
     _validateRequiredAttributes(json);
 
     // Validate attributes
+    _validateContactType(json['contact_type']);
     _validateStringLength('contact_name', 200);
     _validateStringLength('company_name', 200);
     _validateStringLength('facebook', 100);
     _validateStringLength('twitter', 100);
     _validateNotesLength(json['notes']);
+  }
+
+
+  void _validateContactType(String? type) {
+    if (type == null) return;
+
+    const allowedValues = [
+      'customer',
+      'vendor',
+    ];
+    if (!allowedValues.contains(type)) {
+      throw ArgumentError(
+          'Contact type must be one of the following: $allowedValues.');
+    }
   }
 
   void _validateRequiredAttributes(Map<String, dynamic> json) {
