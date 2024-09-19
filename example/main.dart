@@ -38,9 +38,10 @@ Future<void> main() async {
 
   // Clone project
   //http.Response response = await zohoBooks.projects.create(project);
-  http.Response response = await zohoBooks.projects.all(queryParameters: {
-    'sort_column': 'project_name',
-    'sort_order': 'A',
+  //http.Response response = await zohoBooks.contacts.all();
+  http.Response response = await zohoBooks.contacts.all(queryParameters: {
+    'sort_column': 'contact_name',
+    'sort_order': 'D',
     'filter_by': 'Status.All',
   });
 

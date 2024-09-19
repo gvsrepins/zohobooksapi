@@ -12,6 +12,8 @@ class BaseResource {
     'per_page': '100',
   };
 
+  Map<String, dynamic> queryParameters = {};
+
   final String resourceName = '';
   final String baseUrl = 'https://www.zohoapis.com/books/v3';
 
@@ -45,15 +47,17 @@ class BaseResource {
   }
 
   Map<String, dynamic>? _prepareQueryParameters(Map<String, dynamic>? queryParameters) {
+    // Create a new map to avoid modifying the original map
+    final Map<String, dynamic> finalQueryParameters = {};
 
-    if(queryParameters != null) {
-      queryParameters.addAll(pageContextQueryParameters);  
+    if (queryParameters != null) {
+      finalQueryParameters.addAll(queryParameters);
     }
 
-    queryParameters ??= {};
-    queryParameters['organization_id'] = organizationId;
+    finalQueryParameters.addAll(pageContextQueryParameters);
+    finalQueryParameters['organization_id'] = organizationId;
 
-    return queryParameters;
+    return finalQueryParameters;
   }
 
   Future<http.Response> post(uri, Map<String, dynamic> data) async {

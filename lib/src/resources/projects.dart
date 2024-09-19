@@ -9,11 +9,6 @@ import 'package:http/http.dart' as http;
 // Ref: https://www.zoho.com/books/api/v3/projects/#overview
 
 class Projects extends BaseResource {
-  Map<String, dynamic> queryParameters = {
-    'sort_column': 'created_time',
-    'sort_order': 'D',
-    'filter_by': 'Status.All',
-  };
 
   Projects(super.httpClient, super.organizationId);
 
@@ -34,7 +29,7 @@ class Projects extends BaseResource {
   Future<http.Response> all(
       {Map<String, dynamic> queryParameters = const {}}) async {
     //merge new queryParameters with the default ones
-    queryParameters = this.queryParameters..addAll(queryParameters);
+    queryParameters = super.queryParameters..addAll(queryParameters);
     var uri = super.prepareUrl(queryParameters: queryParameters);
 
     return await get(uri);
