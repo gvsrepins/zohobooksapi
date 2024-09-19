@@ -1,5 +1,5 @@
 import 'package:dotenv/dotenv.dart';
-import 'package:zohobooks_api/zohoboks_api.dart';
+import 'package:zohobooks_api/zoho_books_api.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> main() async {

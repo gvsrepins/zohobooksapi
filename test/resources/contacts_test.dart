@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:faker/faker.dart';
 import '../test_setup.dart' as setup;
 import 'package:http/http.dart' as http;
-import 'package:zohobooks_api/zohoboks_api.dart';
+import 'package:zohobooks_api/zoho_books_api.dart';
 
 void main() {
   setup.main();

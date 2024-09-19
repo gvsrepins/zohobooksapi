@@ -1,4 +1,4 @@
-import 'package:zohobooks_api/zohoboks_api.dart';
+import 'package:zohobooks_api/zoho_books_api.dart';
 import 'package:intl/intl.dart';
 
 
