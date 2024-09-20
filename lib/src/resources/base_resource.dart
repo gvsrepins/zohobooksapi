@@ -49,12 +49,12 @@ class BaseResource {
   Map<String, dynamic>? _prepareQueryParameters(Map<String, dynamic>? queryParameters) {
     // Create a new map to avoid modifying the original map
     final Map<String, dynamic> finalQueryParameters = {};
+    finalQueryParameters.addAll(pageContextQueryParameters);
 
     if (queryParameters != null) {
       finalQueryParameters.addAll(queryParameters);
     }
-
-    finalQueryParameters.addAll(pageContextQueryParameters);
+    
     finalQueryParameters['organization_id'] = organizationId;
 
     return finalQueryParameters;
