@@ -15,7 +15,8 @@ Add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  zohobooks_api: ^1.0.0
+  zohobooks_api:
+    git: https://github.com/gvsrepins/zohobooksapi.git
 ```
 
 Then run:
